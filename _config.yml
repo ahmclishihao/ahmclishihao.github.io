@@ -39,7 +39,7 @@ sass:
   style: compressed
 
 exclude:
-- ReadMe.md
+- README.md
 - htmlTest.md
 
 include: [_pages]
