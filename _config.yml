@@ -40,7 +40,7 @@ sass:
 
 exclude:
 - ReadMe.md
-- testHtml.md
+- htmlTest.md
 
 include: [_pages]
 
