@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[MD控件的使用]]></title>
+      <url>http://www.lshao.me/2016/12/24/2016-12-24-MD%E6%8E%A7%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
+      <content type="html"><![CDATA[<p>Material Desgin风格控件的使用。Google 官方design support包里的新控件，虽然好看，但是用起来还真不是一次就能搞定的。</p>
+<a id="more"></a>
+<h3 id="layout-scrollFlags属性"><a href="#layout-scrollFlags属性" class="headerlink" title="layout_scrollFlags属性"></a>layout_scrollFlags属性</h3><p>AppBarLayout的子布局有5种滚动标识(就是上面代码CollapsingToolbarLayout中配置的app:layout_scrollFlags属性)：</p>
+<p>1、scroll:将此布局和滚动时间关联。这个标识要设置在其他标识之前，没有这个标识则布局不会滚动且其他标识设置无效。</p>
+<p>2、enterAlways:任何向下滚动操作都会使此布局可见。这个标识通常被称为“快速返回”模式。</p>
+<p>3、enterAlwaysCollapsed：假设你定义了一个最小高度（minHeight）同时enterAlways也定义了，那么view将在到达这个最小高度的时候开始显示，并且从这个时候开始慢慢展开，当滚动到顶部的时候展开完。</p>
+<p>4、exitUntilCollapsed：当你定义了一个minHeight，此布局将在滚动到达这个最小高度的时候折叠。</p>
+<p>5、snap:当一个滚动事件结束，如果视图是部分可见的，那么它将被滚动到收缩或展开。例如，如果视图只有底部25%显示，它将折叠。相反，如果它的底部75%可见，那么它将完全展开。</p>
+<h3 id="fitSystemWindow"><a href="#fitSystemWindow" class="headerlink" title="fitSystemWindow"></a>fitSystemWindow</h3><p>以CoordinatorLayout为根布局时且设置 fit = true 控件会自己适应并填充状态栏</p>
+<p>而普通的控件 fit = true 则会与状态栏间隔，fit = false 则会跑到状态中去<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:statusBarColor"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span> （5.0） 该属性 不会让布局内容填充到状态栏中 就算设置fitSystemWindow = false</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowTranslucentStatus"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span> （4.4属性） 该属性会让布局内容填充到状态栏中 不想填充到状态栏的控件设置 fit = true ； 想填充到状态栏的设置 fit = false （4.4中填充到状态栏就看不到控件了）</div></pre></td></tr></table></figure></p>
+<h3 id="ActionBar-颜色-对应的主题"><a href="#ActionBar-颜色-对应的主题" class="headerlink" title="ActionBar 颜色 对应的主题"></a>ActionBar 颜色 对应的主题</h3><p>黑字 黑图标： app:theme=”@style/Theme.AppCompat.Light”</p>
+<p>白字 白图标： app:theme=”@style/Theme.AppCompat”</p>
+<h3 id="PopuWindow-颜色-对应的主题"><a href="#PopuWindow-颜色-对应的主题" class="headerlink" title="PopuWindow 颜色 对应的主题"></a>PopuWindow 颜色 对应的主题</h3><p>黑底 白字：app:popupTheme=”@style/ThemeOverlay.AppCompat.Dark”</p>
+<p>白底 黑字：app:popupTheme=”@style/ThemeOverlay.AppCompat.Light”</p>
+<h3 id="CollapseToolBarLayout-的使用"><a href="#CollapseToolBarLayout-的使用" class="headerlink" title="CollapseToolBarLayout 的使用"></a>CollapseToolBarLayout 的使用</h3><p>CollapseToolBarLayout中 ：<br>1、toolbar 要写在最下面 否则会有一系列失效</p>
+<p>2、同时配置的ImageView要 fit = true才会填充状态栏</p>
+<p>3、toolBar不随折叠变换 设置 collapsing.setTitleEnabled(false); 或 app:titleEnabled=”false” </p>
+<p>4、title 改变文字 文字可折叠时通过collapse设置 不可折叠时通过toolbar先app:title=”tool bar 先设置一次 才可以写字” 然后才可以设置文字</p>
+<p>5、折叠后内容的颜色 app:contentScrim=”#FF4081” 状态栏的颜色 app:statusBarScrim=”@android:color/transparent”</p>
+<p>如下是一个标准的配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"260dp"</span></div><div class="line">        <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span><span class="attr">------</span>》》》<span class="attr">fit</span>后填充状态栏</div><div class="line">        <span class="attr">app:theme</span>=<span class="string">"@style/Theme.AppCompat"</span></div><div class="line">        &gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">android.support.design.widget.CollapsingToolbarLayout</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/collapsing"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">app:contentScrim</span>=<span class="string">"#FF4081"</span> <span class="attr">----------</span>》》》折叠后颜色</div><div class="line"><span class="attr">app:statusBarScrim</span>=<span class="string">"@android:color/transparent"</span></div><div class="line">            <span class="attr">app:titleEnabled</span>=<span class="string">"false"</span><span class="attr">------------</span>》》》<span class="attr">title</span>不伸缩</div><div class="line">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">"scroll|snap|exitUntilCollapsed"</span> <span class="attr">----</span>》》》滑动类型</div><div class="line">            &gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span><span class="attr">------</span>》》》<span class="attr">fit</span>后图片填充状态栏</div><div class="line">                <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></div><div class="line">                <span class="attr">android:src</span>=<span class="string">"@drawable/test_pic"</span></div><div class="line">                <span class="attr">app:layout_collapseMode</span>=<span class="string">"parallax"</span><span class="attr">----</span>》》》缩放模式</div><div class="line">                <span class="attr">app:layout_collapseParallaxMultiplier</span>=<span class="string">"0.7"</span><span class="attr">---</span>》》》缩放比例</div><div class="line">/&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar-------》》》toolbar要写在最下面</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/toolbar"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span></div><div class="line">                <span class="attr">android:theme</span>=<span class="string">"@style/Theme.AppCompat"</span></div><div class="line">                <span class="attr">app:title</span>=<span class="string">"tool bar 先设置一次 才可以写字"</span> <span class="attr">----</span>》》》必须先设置一次</div><div class="line">                <span class="attr">app:layout_collapseMode</span>=<span class="string">"pin"</span><span class="attr">-----</span>》》》固定模式</div><div class="line">                <span class="attr">app:popupTheme</span>=<span class="string">"@style/ThemeOverlay.AppCompat.Light"</span></div><div class="line">                /&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">android.support.design.widget.CollapsingToolbarLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：<img src="/img/collapselayout.gif" width="320" height="480"></p>
+<h3 id="CoordinatorLayout-是怎么做到适应状态栏的？"><a href="#CoordinatorLayout-是怎么做到适应状态栏的？" class="headerlink" title="CoordinatorLayout 是怎么做到适应状态栏的？"></a>CoordinatorLayout 是怎么做到适应状态栏的？</h3><p>构造函数中调用 setupForInsets</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">CoordinatorLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">...</div><div class="line"></div><div class="line">      mStatusBarBackground = a.getDrawable(R.styleable.CoordinatorLayout_statusBarBackground);<span class="comment">//-----》》》获取背景drawable</span></div><div class="line">      </div><div class="line">...</div><div class="line"></div><div class="line">      setupForInsets();<span class="comment">//-------------》》》》调用</span></div><div class="line"></div><div class="line">      <span class="keyword">super</span>.setOnHierarchyChangeListener(<span class="keyword">new</span> HierarchyChangeListener());</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>根据是否fitsSystemWindows来设置不同的 ui标签<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setupForInsets</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &lt; <span class="number">21</span>) &#123;<span class="comment">// ----》》》5.0一下不适用</span></div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (ViewCompat.getFitsSystemWindows(<span class="keyword">this</span>)) &#123;</div><div class="line">        <span class="keyword">if</span> (mApplyWindowInsetsListener == <span class="keyword">null</span>) &#123;</div><div class="line">            mApplyWindowInsetsListener =</div><div class="line">                    <span class="keyword">new</span> android.support.v4.view.OnApplyWindowInsetsListener() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> WindowInsetsCompat <span class="title">onApplyWindowInsets</span><span class="params">(View v,</span></span></div><div class="line">                                WindowInsetsCompat insets) &#123;</div><div class="line">                            <span class="keyword">return</span> setWindowInsets(insets);</div><div class="line">                        &#125;</div><div class="line">                    &#125;;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// First apply the insets listener</span></div><div class="line">        ViewCompat.setOnApplyWindowInsetsListener(<span class="keyword">this</span>, mApplyWindowInsetsListener);</div><div class="line"></div><div class="line">        <span class="comment">// Now set the sys ui flags to enable us to lay out in the window insets</span></div><div class="line">        setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);<span class="comment">//----》》》设置UI标签</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        ViewCompat.setOnApplyWindowInsetsListener(<span class="keyword">this</span>, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="水波纹特效"><a href="#水波纹特效" class="headerlink" title="水波纹特效"></a>水波纹特效</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ripple</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">	<span class="attr">android:color</span>=<span class="string">"@color/touch_effect"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/mask"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">shape</span> <span class="attr">android:shape</span>=<span class="string">"rectangle"</span>&gt;</span></div><div class="line">	    <span class="tag">&lt;<span class="name">solid</span> <span class="attr">android:color</span>=<span class="string">"@android:color/white"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">shape</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ripple</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="水波纹揭示效果"><a href="#水波纹揭示效果" class="headerlink" title="水波纹揭示效果"></a>水波纹揭示效果</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ViewAnimationUtils.createCircularReveal(View view, <span class="keyword">int</span> centerX, <span class="keyword">int</span> centerY, <span class="keyword">float</span> startRadius, <span class="keyword">float</span> endRadius)</div></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SurfaceView的使用]]></title>
+      <url>http://www.lshao.me/2016/11/13/2016-11-13-SurfaceView%E7%9A%84%E4%BD%BF%E7%94%A8.html</url>
+      <content type="html"><![CDATA[<p>SurfaceView的基本逻辑<br><a id="more"></a></p>
+<h2 id="SurfaceView"><a href="#SurfaceView" class="headerlink" title="SurfaceView"></a>SurfaceView</h2><p>主要的类：</p>
+<blockquote>
+<p>SurfaceView 展示内容的地方</p>
+<p>↓    getHolder()</p>
+<p>SurfaceHolder 展示的内容</p>
+<p>↓    addCallback() → getSurface() 获取 surface</p>
+<p>SurfaceHolder.Callback</p>
+<p>↓    线程需要在surfaceCreate时创建，surfaceDestroy停止</p>
+<p>Thread 持续展示内容的工人</p>
+</blockquote>
+<h2 id="Surface"><a href="#Surface" class="headerlink" title="Surface"></a>Surface</h2><blockquote>
+<p>lockCanvas 锁定画布 保证线程安全</p>
+<p>↓ 开启线程</p>
+<p>绘制界面 </p>
+<p>unlockCanvasAndPost 解锁画布</p>
+<p>↓ 关闭线程</p>
+</blockquote>
+<h2 id="绘制背景"><a href="#绘制背景" class="headerlink" title="绘制背景"></a>绘制背景</h2><p><code>每次一个对象重新绘制位置的时候都会造成叠加的效果</code>，<br>如何解决：是通过不断重新绘制背景来覆盖原来的图片</p>
+<h2 id="Rect-矩形类"><a href="#Rect-矩形类" class="headerlink" title="Rect 矩形类"></a>Rect 矩形类</h2><p>android提供的范围类，可以检测是否包含某点</p>
+<h2 id="Cocos2dx"><a href="#Cocos2dx" class="headerlink" title="Cocos2dx"></a>Cocos2dx</h2><p>CCGLSurfaceView surfaceview类</p>
+<p>CCDirector 导演类 （单例的）CCDirector.sharedDirector</p>
+<p>CCScene 场景类 CCScene.node() 展示节点的根节点</p>
+<p>CCLayer 图层类 CCSense.addChild() 添加图层</p>
+<p>CCSprite 精灵类</p>
+<p>默认图片放在asset中</p>
+<p>坐标都是左下角开始的正常坐标系，Sprite的默认锚点在中间点<br>默认从锚点绘制</p>
+<p>director可以和activity生命周期绑定，手动绑定(在各个周期内绑定)</p>
+<h2 id="layer处理触摸事件"><a href="#layer处理触摸事件" class="headerlink" title="layer处理触摸事件"></a>layer处理触摸事件</h2><blockquote>
+<p>都是在子线程中进行的，不能进行UI操作，当然surfaceView可以</p>
+</blockquote>
+<p>layer事件中开启<br>setIsTouchEnabled(true);触摸事件开关</p>
+<p>ccTOuchedBegan(event);按下事件</p>
+<p>andorid坐标系的点转换为cocos中的点converTouchToNodeSpace</p>
+<h2 id="CCNode"><a href="#CCNode" class="headerlink" title="CCNode"></a>CCNode</h2><p>获取单元的范围:CGRect rect = ccNode.getBoundingBox();</p>
+<p>获取单元的大小：CGSize size = ccNode.getBoundingBox().size;</p>
+<p>将Android的MotionEvent转换成 Cocos2d上的点<br>CGPoint cgPoint = convertTouchToNodeSpace(event);</p>
+<h2 id="CCAction"><a href="#CCAction" class="headerlink" title="CCAction"></a>CCAction</h2><p>动作</p>
+<p>CCSequence <code>串行动作</code> CCSequence.action(xx,xx);<br>CCSpawn <code>并行动作</code> </p>
+<p>CCRepeatForever 重复的动作，用于包装Action</p>
+<p>CCEaseIn 具备加速的动作，用于包装Action</p>
+<p>CCLabel 专门显示文字的sprite</p>
+<p>ccColor3B 颜色渐变的action cc3(r,g,b);</p>
+<p>xxxBy 事件都重写了reserver 而 xxxTo都没有重写reserver会报异常。例如：CCTintTo CCRotateTo CCJumpTo</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Android调H5]]></title>
+      <url>http://www.lshao.me/2016/11/07/2016-11-07-Android%E8%B0%83H5.html</url>
+      <content type="html"><![CDATA[<p>如何使用Android中的WebView与JavaScript交互？</p>
+<a id="more"></a>
+<h1 id="Android调H5"><a href="#Android调H5" class="headerlink" title="Android调H5"></a>Android调H5</h1><p>1.WebView</p>
+<pre><code>可以加载链接，也可以加载本地网页
+加载assets文件夹中的网页：loadUrl(&quot;file:///android_asset/name&quot;)
+</code></pre><p>2.java调js</p>
+<pre><code>注意参数加‘’
+&quot;javascript:jsName(&apos;&quot;+params+&quot;&apos;)&quot;--&gt;这是js的一种写法
+webView.loadUrl(&quot;javascript:jsName(&apos;&quot;+params+&quot;&apos;)&quot;);
+</code></pre><p>3.js调java</p>
+<pre><code>1.android
+声明js对应接口，webWiew.addJavascriptInterface(new Class(), &quot;字段名&quot;)
+字段对应的android类中方法名需要添加注解@JavascriptInterface
+2.js
+window.字段名.方法名
+</code></pre><h1 id="ScrollView结合ListView使用"><a href="#ScrollView结合ListView使用" class="headerlink" title="ScrollView结合ListView使用"></a>ScrollView结合ListView使用</h1><p>结合使用会造成listview只显示一行，因为listview需要重新测量高度，两种方法进行测量。</p>
+<p>1、重新测量每一项高度+divider的总高度最后得到精确值，<br>2、重写onMeasure方法，直接设置高度测量规则为，<br>    MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE&gt;&gt;2,AT_MOST);<br>即给一个非常大的值让其自己适配</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python 入门基本点]]></title>
+      <url>http://www.lshao.me/2016/10/28/2016-10-28-python%E5%85%A5%E9%97%A8.html</url>
+      <content type="html"><![CDATA[<p>一些Python的基本用法，目的是看懂它~~</p>
+<a id="more"></a>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>Python文件中输出中文以及中文注释，需要添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># -*-coding:utf-8-*-</span></div><div class="line"><span class="comment"># 你必须声明文件的编码，方可输出中文以及中文的注释</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'hello world'</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'i\'m li'</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"i'm shi"</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"I come from \n\</span></div><div class="line">China"  <span class="comment"># Write as this syntax,if you want change line</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"""I'm li shi hao.</span></div><div class="line">You see!I'm Chinese!"""  <span class="comment"># This will get a new line</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">"you can compare next statement different"</span></div><div class="line"><span class="keyword">print</span> <span class="string">"1\n2\n3\n4\t5\t6\t"</span></div><div class="line"><span class="keyword">print</span> <span class="string">r"1\n2\n3\n4\t5\t6\t"</span></div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">u"厉害了 word中国！"</span></div></pre></td></tr></table></figure>
+<p>注意上面每一个print就自动换行一次</p>
+<h2 id="不同的运算符"><a href="#不同的运算符" class="headerlink" title="不同的运算符"></a>不同的运算符</h2><p>运算符<br>**幂运算</p>
+<p>2**2 = 4 </p>
+<p>/ 除法运算(带小数) //除法取整 %取余</p>
+<p>and 逻辑与 not逻辑非 or逻辑或 同样都是短路的</p>
+<p>~x 翻转x 即-(x+1)</p>
+<h2 id="严格的缩进控制代码的区块"><a href="#严格的缩进控制代码的区块" class="headerlink" title="严格的缩进控制代码的区块"></a>严格的缩进控制代码的区块</h2><p>python中通过 : 来表明下面将是程序块<br>通过制表符的间隔对齐范围，表示程序块范围</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">	<span class="keyword">print</span> <span class="string">'123'</span></div><div class="line">	<span class="keyword">print</span> <span class="string">'321'</span></div><div class="line"><span class="comment">#看到上面的部分代表while的程序块，下面部分代表这while以外的部分</span></div><div class="line"><span class="keyword">print</span> <span class="string">'000'</span></div></pre></td></tr></table></figure>
+<h2 id="定义方法"><a href="#定义方法" class="headerlink" title="定义方法"></a>定义方法</h2><p>def关键字表示定义一个方法<br>pythond也有类似三元表达式 true_part if condition else false_part<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_num</span><span class="params">(a, b)</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"最大的是："</span>, a <span class="keyword">if</span> a &gt; b <span class="keyword">else</span> b</div></pre></td></tr></table></figure></p>
+<h2 id="方法中默认参数"><a href="#方法中默认参数" class="headerlink" title="方法中默认参数"></a>方法中默认参数</h2><p>如下方法的参数中，带有默认值的参数只能放在其他参数的后面才可以使用,<br>原因是：当你在调用方法是第一个参数往往是赋值给第一个形参的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">method</span><span class="params">(arg0,arg1=<span class="number">1</span>)</span>:</span></div><div class="line">	<span class="keyword">print</span> arg0*arg1</div></pre></td></tr></table></figure>
+<h2 id="from-xxx-import-xxx"><a href="#from-xxx-import-xxx" class="headerlink" title="from xxx import xxx"></a>from xxx import xxx</h2><p>从某个module中导入参数，这样就不必每次都写xxx.yyy</p>
+<p>例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</div></pre></td></tr></table></figure></p>
+<p>那么以后的argv就可以直接使用，但这将占用一个变量名</p>
+<h2 id="主modul名称"><a href="#主modul名称" class="headerlink" title="主modul名称"></a>主modul名称</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding:utf-8</span></div><div class="line"><span class="comment"># __name__是每一个module在执行是的名称</span></div><div class="line"><span class="comment"># __main__是主线程的名称</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"I called by myself"</span></div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"who called me?"</span>, __name__</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">moduleM</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"Hi! I'm module"</span></div><div class="line"></div><div class="line"></div><div class="line">name = <span class="string">"using"</span></div></pre></td></tr></table></figure>
+<h2 id="dir查看命令"><a href="#dir查看命令" class="headerlink" title="dir查看命令"></a>dir查看命令</h2><p>dir()命令在命令行中使用，会打印对应module中的属性列表,方法列表<br>dir(xxx)可以打印指定module的信息</p>
+<h2 id="del删除命令"><a href="#del删除命令" class="headerlink" title="del删除命令"></a>del删除命令</h2><pre><code>def method():
+    global x
+    print x
+    del x
+    # del method 不能在方法中删除方法
+
+x = &quot;test del&quot;
+method()
+
+# del method # 可以删除变量这样这个变量，他也可以删除一个方法就像没有存在过一样
+# method() # 该句将出错因为x已经被删除了
+</code></pre><h2 id="Python中的数据结构"><a href="#Python中的数据结构" class="headerlink" title="Python中的数据结构"></a>Python中的数据结构</h2>]]></content>
+    </entry>
+    
+  
+  
+</search>
