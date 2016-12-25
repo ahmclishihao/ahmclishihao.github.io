@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.lshao.me/2016/11/07/2016-11-07-Android调H5.html">
 <meta property="og:site_name" content="潜水的沙">
 <meta property="og:description" content="如何使用Android中的WebView与JavaScript交互？">
-<meta property="og:updated_time" content="2016-12-25T10:41:21.246Z">
+<meta property="og:updated_time" content="2016-12-25T13:05:40.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android调H5">
 <meta name="twitter:description" content="如何使用Android中的WebView与JavaScript交互？">
@@ -237,11 +237,15 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/android/">android</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
     </div>
 
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Js/">Js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebView/">WebView</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -252,19 +256,18 @@
         <p>如何使用Android中的WebView与JavaScript交互？</p>
 <a id="more"></a>
 <h1 id="Android调H5"><a href="#Android调H5" class="headerlink" title="Android调H5"></a>Android调H5</h1><p>1.WebView</p>
-<pre><code>可以加载链接，也可以加载本地网页
-加载assets文件夹中的网页：loadUrl(&quot;file:///android_asset/name&quot;)
-</code></pre><p>2.java调js</p>
-<pre><code>注意参数加‘’
-&quot;javascript:jsName(&apos;&quot;+params+&quot;&apos;)&quot;--&gt;这是js的一种写法
-webView.loadUrl(&quot;javascript:jsName(&apos;&quot;+params+&quot;&apos;)&quot;);
-</code></pre><p>3.js调java</p>
-<pre><code>1.android
-声明js对应接口，webWiew.addJavascriptInterface(new Class(), &quot;字段名&quot;)
-字段对应的android类中方法名需要添加注解@JavascriptInterface
-2.js
-window.字段名.方法名
-</code></pre><h1 id="ScrollView结合ListView使用"><a href="#ScrollView结合ListView使用" class="headerlink" title="ScrollView结合ListView使用"></a>ScrollView结合ListView使用</h1><p>结合使用会造成listview只显示一行，因为listview需要重新测量高度，两种方法进行测量。</p>
+<blockquote>
+<p>可以加载链接，也可以加载本地网页<br>加载assets文件夹中的网页：loadUrl(“file:///android_asset/name”)</p>
+</blockquote>
+<p>2.java调js</p>
+<blockquote>
+<p>注意参数加‘’<br>“javascript:jsName(‘“+params+”‘)”–&gt;这是js的一种写法<br>webView.loadUrl(“javascript:jsName(‘“+params+”‘)”);</p>
+</blockquote>
+<p>3.js调java</p>
+<blockquote>
+<p>1.android<br>声明js对应接口，webWiew.addJavascriptInterface(new Class(), “字段名”)<br>字段对应的android类中方法名需要添加注解@JavascriptInterface<br>2.js<br>window.字段名.方法名</p>
+</blockquote>
+<h1 id="ScrollView结合ListView使用"><a href="#ScrollView结合ListView使用" class="headerlink" title="ScrollView结合ListView使用"></a>ScrollView结合ListView使用</h1><p>结合使用会造成listview只显示一行，因为listview需要重新测量高度，两种方法进行测量。</p>
 <p>1、重新测量每一项高度+divider的总高度最后得到精确值，<br>2、重写onMeasure方法，直接设置高度测量规则为，<br>    MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE&gt;&gt;2,AT_MOST);<br>即给一个非常大的值让其自己适配</p>
 
       
@@ -277,7 +280,7 @@ window.字段名.方法名
         <p><span>本文标题:</span><a href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">ahmclishihao</a></p>
         <p><span>发布时间:</span>2016-11-07, 02:21:05</p>
-        <p><span>最后更新:</span>2016-12-25, 18:41:21</p>
+        <p><span>最后更新:</span>2016-12-25, 21:05:40</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/11/07/2016-11-07-Android调H5.html" title="Android调H5">http://www.lshao.me/2016/11/07/2016-11-07-Android调H5.html</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2016/11/07/2016-11-07-Android调H5.html　　作者: ahmclishihao" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
