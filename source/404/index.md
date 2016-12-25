@@ -14,6 +14,6 @@ I'm Sorry!We don't find this link.You can use 'search' to find out article! ^_^
 </center>
 
 <center>
-<a href="http://localhost:4000/about/">About Me</a>
+<a href="/about/">About Me</a>
 </center>
 
