@@ -2,7 +2,8 @@
 layout: post
 title: "SurfaceView的使用"
 date: 2016-11-13 02:12:08
-categories: notes
+categories: Android
+tags: [Android]
 ---
 
 SurfaceView的基本逻辑
