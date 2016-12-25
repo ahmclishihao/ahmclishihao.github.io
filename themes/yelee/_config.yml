@@ -136,8 +136,8 @@ highlight_style:
   # 通过 code_block 切换内置代码高亮配色主题
 
 blockquote_style:
-  #on: true
-  blockquote: 1  # Value: 0 - 7 可选
+  on: true
+  blockquote: 4  # Value: 0 - 7 可选
   # 自定义文章「引用部分」的样式
 
 # Headings Style | 标题风格
