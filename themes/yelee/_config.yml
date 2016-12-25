@@ -44,7 +44,7 @@ subnav:
   #新浪微博: "sina weibo"
   GitHub: "http://github.com/ahmclishihao"
   #V2EX: "#"
-  RSS: "/atom.xml"
+  #RSS: "/atom.xml"
   #知乎: "zhihu"
   #豆瓣: "douban"
   #简书: "jianshu"
