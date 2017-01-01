@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="ahmclishihao" />
+
+
+
+<meta name="description" content="自定义View中比较重要的一些知识点，本篇主要学习Canvas的一些基本使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2016-12-30-自定义View高级知识点（一）">
+<meta property="og:url" content="http://www.lshao.me/2016/12/30/2016-12-30-自定义View高级知识点(一).html">
+<meta property="og:site_name" content="潜水的沙">
+<meta property="og:description" content="自定义View中比较重要的一些知识点，本篇主要学习Canvas的一些基本使用。">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/PorterDuffMode.jpg">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/drawArc.png">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/pieChart.png">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/circleView.png">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/scale.png">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/scale_ratote_translate.png">
+<meta property="og:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/skew.png">
+<meta property="og:updated_time" content="2017-01-01T14:22:52.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2016-12-30-自定义View高级知识点（一）">
+<meta name="twitter:description" content="自定义View中比较重要的一些知识点，本篇主要学习Canvas的一些基本使用。">
+<meta name="twitter:image" content="http://www.lshao.me/img/2016-12-30-自定义View高级知识点(一)/PorterDuffMode.jpg">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="潜水的沙" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>2016-12-30-自定义View高级知识点（一） | 潜水的沙</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">ahmclishihao</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">ahmclishihao</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">ahmclishihao</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-2016-12-30-自定义View高级知识点(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html" class="article-date">
+      <time datetime="2016-12-30T07:02:40.000Z" itemprop="datePublished">2016-12-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2016-12-30-自定义View高级知识点（一）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>自定义View中比较重要的一些知识点，本篇主要学习Canvas的一些基本使用。</p>
+<a id="more"></a>
+<h2 id="Canvas可以画的东西"><a href="#Canvas可以画的东西" class="headerlink" title="Canvas可以画的东西"></a>Canvas可以画的东西</h2><table>
+<thead>
+<tr>
+<th>操作类型</th>
+<th>相关API</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>绘制颜色</td>
+<td>drawColor, drawRGB, drawARGB</td>
+<td>使用单一颜色填充整个画布</td>
+</tr>
+<tr>
+<td>绘制基本形状</td>
+<td>drawPoint, drawPoints, drawLine, drawLines, drawRect, drawRoundRect, drawOval, drawCircle, drawArc</td>
+<td>依次为 点、线、矩形、圆角矩形、椭圆、圆、圆弧</td>
+</tr>
+<tr>
+<td>绘制图片</td>
+<td>drawBitmap, drawPicture</td>
+<td>绘制位图和图片</td>
+</tr>
+<tr>
+<td>绘制文本</td>
+<td>drawText,    drawPosText, drawTextOnPath</td>
+<td>依次为 绘制文字、绘制文字时指定每个文字位置、根据路径绘制文字</td>
+</tr>
+<tr>
+<td>绘制路径</td>
+<td>drawPath</td>
+<td>绘制路径，绘制贝塞尔曲线时也需要用到该函数</td>
+</tr>
+<tr>
+<td>顶点操作</td>
+<td>drawVertices, drawBitmapMesh</td>
+<td>通过对顶点操作可以使图像形变，drawVertices直接对画布作用、 drawBitmapMesh只对绘制的Bitmap作用</td>
+</tr>
+<tr>
+<td>画布剪裁</td>
+<td>clipPath,    clipRect</td>
+<td>设置画布的显示区域</td>
+</tr>
+<tr>
+<td>画布快照</td>
+<td>save, restore, saveLayerXxx, restoreToCount, getSaveCount</td>
+<td>依次为 保存当前状态、 回滚到上一次保存的状态、 保存图层状态、 回滚到指定状态、 获取保存次数</td>
+</tr>
+<tr>
+<td>画布变换</td>
+<td>translate, scale, rotate, skew</td>
+<td>依次为 位移、缩放、 旋转、错切</td>
+</tr>
+<tr>
+<td>Matrix(矩阵)</td>
+<td>getMatrix, setMatrix, concat</td>
+<td>实际画布的位移，缩放等操作的都是图像矩阵Matrix，只不过Matrix比较难以理解和使用，故封装了一些常用的方法。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="颜色混合模式-Alpha通道相关"><a href="#颜色混合模式-Alpha通道相关" class="headerlink" title="颜色混合模式(Alpha通道相关)"></a>颜色混合模式(Alpha通道相关)</h2><p>通过前面介绍我们知道颜色一般都是四个通道(ARGB)的，其中(RGB)控制的是颜色,而A(Alpha)控制的是透明度。</p>
+<p>因为我们的显示屏是没法透明的，因此最终显示在屏幕上的颜色里可以认为没有Alpha通道。Alpha通道主要在两个图像混合的时候生效。</p>
+<p>默认情况下，当一个颜色绘制到Canvas上时的混合模式是这样计算的：</p>
+<p>(RGB通道) 最终颜色 = 绘制的颜色 + (1 - 绘制颜色的透明度) × Canvas上的原有颜色。</p>
+<p>注意：</p>
+<p>1.这里我们一般把每个通道的取值从0(ox00)到255(0xff)映射到0到1的浮点数表示。</p>
+<p>2.这里等式右边的“绘制的颜色”、“Canvas上的原有颜色” 都是经过预乘了自己的Alpha通道的值。如绘制颜色：0x88ffffff，那么参与运算时的每个颜色通道的值不是1.0，而是(1.0 * 0.5333 = 0.5333)。 (其中0.5333 = 0x88/0xff)</p>
+<p>使用这种方式的混合，就会造成后绘制的内容以半透明的方式叠在上面的视觉效果。</p>
+<h2 id="Paint-setXfermode模式"><a href="#Paint-setXfermode模式" class="headerlink" title="Paint.setXfermode模式"></a>Paint.setXfermode模式</h2><p>下表是各个PorterDuff模式的混合计算公式：（D指原本在Canvas上的内容dst，S指绘制输入的内容src，a指alpha通道，c指RGB各个通道）,各种模式如下图所示。</p>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/PorterDuffMode.jpg" alt="porterDuff的模式" title="PorterDuffMode.jpg"></p>
+<h2 id="onMeasure"><a href="#onMeasure" class="headerlink" title="onMeasure"></a>onMeasure</h2><p>真正进行测量的是 setMeasuredDimension<br>如果对View的宽高进行修改了，不要调用 super.onMeasure( widthMeasureSpec, heightMeasureSpec); 要调用 setMeasuredDimension( widthsize, heightsize); 这个函数。</p>
+<h2 id="paint绘制图形"><a href="#paint绘制图形" class="headerlink" title="paint绘制图形"></a>paint绘制图形</h2><blockquote>
+<p>一个要点：绘制的基本形状由Canvas确定，但绘制出来的颜色,具体效果则由Paint确定<br>STROKE                //描边<br>FILL                  //填充<br>FILL_AND_STROKE       //描边加填充</p>
+</blockquote>
+<p>1.圆角矩形</p>
+<p>利用圆角矩形也可以绘制出椭圆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">300</span>);</div><div class="line">mPaint.setColor(Color.BLACK);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line">mPaint.setColor(Color.RED);</div><div class="line">canvas.drawRoundRect(rectF, <span class="number">100</span>, <span class="number">50</span>, mPaint);</div></pre></td></tr></table></figure>
+<p>2.椭圆</p>
+<p>椭圆绘制可以理解为做一个矩形的内切圆，如果这是一个正方形那么绘制出来的就是一个圆形</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">300</span>);</div><div class="line">mPaint.setColor(Color.BLACK);</div><div class="line">canvas.drawOval(rectF, mPaint);</div></pre></td></tr></table></figure>
+<p>3.扇形</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drawArc(RectF oval, <span class="function"><span class="keyword">float</span> <span class="title">startAngle</span><span class="params">(开始角度<span class="number">0</span><span class="number">-360</span>)</span>, <span class="keyword">float</span> <span class="title">sweepAngle</span><span class="params">(扫过角度<span class="number">0</span><span class="number">-360</span>)</span>, <span class="keyword">boolean</span> <span class="title">useCenter</span><span class="params">(是否连接圆心)</span>,Paint paint)</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用中心</span></div><div class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</div><div class="line">mPaint.setStyle(Paint.Style.FILL_AND_STROKE); </div><div class="line">mPaint.setColor(Color.GRAY);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line">mPaint.setStyle(Paint.Style.STROKE);</div><div class="line">mPaint.setColor(Color.BLACK);</div><div class="line">canvas.drawArc(rectF, <span class="number">0</span>, <span class="number">90</span>, <span class="keyword">true</span>, mPaint);</div><div class="line"></div><div class="line"><span class="comment">// 不使用中心</span></div><div class="line">rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">300</span>, <span class="number">200</span>, <span class="number">400</span>);</div><div class="line">mPaint.setStyle(Paint.Style.FILL_AND_STROKE); <span class="comment">// 填充 并描边</span></div><div class="line">mPaint.setColor(Color.GRAY);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line">mPaint.setStyle(Paint.Style.STROKE); <span class="comment">// 仅描边</span></div><div class="line">mPaint.setColor(Color.RED);</div><div class="line">canvas.drawArc(rectF, <span class="number">0</span>, -<span class="number">90</span>, <span class="keyword">false</span>, mPaint);</div></pre></td></tr></table></figure>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/drawArc.png" alt="扇形" title="drawArc.png"></p>
+<p>4.画一个圆饼图</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PieChartView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Paint mPaint;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> List&lt;Percent&gt; mPercentList;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PieChartView</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PieChartView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PieChartView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        mPaint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</div><div class="line">        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);</div><div class="line">        mPaint.setStrokeCap(Paint.Cap.ROUND);</div><div class="line">        mPaint.setStrokeWidth(<span class="number">2</span>);</div><div class="line"></div><div class="line">        mPercentList = <span class="keyword">new</span> LinkedList&lt;&gt;();</div><div class="line">        mPercentList.add(<span class="keyword">new</span> Percent(<span class="string">"1"</span>, <span class="number">0.4f</span>, Color.WHITE));</div><div class="line">        mPercentList.add(<span class="keyword">new</span> Percent(<span class="string">"2"</span>, <span class="number">0.4f</span>, Color.BLUE));</div><div class="line">        mPercentList.add(<span class="keyword">new</span> Percent(<span class="string">"3"</span>, <span class="number">0.2f</span>, Color.RED));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">100</span>, <span class="number">400</span>, <span class="number">400</span>);</div><div class="line">        canvas.drawOval(rectF, mPaint);</div><div class="line"></div><div class="line">        <span class="keyword">float</span> surplus = <span class="number">1.0f</span>; <span class="comment">// 剩余的范围</span></div><div class="line">        <span class="keyword">float</span> startAngle = <span class="number">0</span>;</div><div class="line">        Percent percent;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, size = mPercentList.size(); i &lt; size; i++) &#123;</div><div class="line">            percent = mPercentList.get(i);</div><div class="line">            <span class="keyword">if</span> (percent.percent &lt;= surplus) &#123;</div><div class="line">                surplus -= percent.percent;</div><div class="line">                startAngle += percent.drawArc(mPaint, canvas, startAngle, rectF);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	* 采用封装的思想</div><div class="line">	*/</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Percent</span> </span>&#123;</div><div class="line">        String tag;</div><div class="line">        <span class="keyword">float</span> percent;</div><div class="line">        <span class="keyword">int</span> color;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Percent</span><span class="params">(String tag, <span class="keyword">float</span> percent, <span class="keyword">int</span> color)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.tag = tag;</div><div class="line">            <span class="keyword">this</span>.percent = percent;</div><div class="line">            <span class="keyword">this</span>.color = color;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 绘制 这个百分比</div><div class="line">         *</div><div class="line">         * <span class="doctag">@param</span> paint</div><div class="line">         * <span class="doctag">@param</span> canvas</div><div class="line">         * <span class="doctag">@param</span> startAngle</div><div class="line">         * <span class="doctag">@param</span> rectF</div><div class="line">         * <span class="doctag">@return</span> 返回绘制的角度大小</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">drawArc</span><span class="params">(Paint paint, Canvas canvas, <span class="keyword">float</span> startAngle, RectF rectF)</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> oldColor = paint.getColor();</div><div class="line">            Paint.Style oldStyle = paint.getStyle();</div><div class="line"></div><div class="line">            paint.setColor(color);</div><div class="line">            paint.setStyle(Paint.Style.FILL);</div><div class="line"></div><div class="line">            canvas.drawArc(rectF, startAngle, <span class="number">360</span> * percent, <span class="keyword">true</span>, paint);</div><div class="line"></div><div class="line">            paint.setColor(oldColor);</div><div class="line">            paint.setStyle(oldStyle);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="number">360</span> * percent;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/pieChart.png" alt="圆饼图" title="pieChart.png"></p>
+<h2 id="操作画布"><a href="#操作画布" class="headerlink" title="操作画布"></a>操作画布</h2><p>操作画布，操作的都是坐标系，是对当前坐标系进行移动、旋转、缩放、错切等操作</p>
+<p>操作画布只会影响接下来的绘画，而不会影响之前已经绘画完成的图像</p>
+<p>1.移动画布</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 移动画布</span></div><div class="line">canvas.translate(getWidth() / <span class="number">2</span>, getHeight() / <span class="number">2</span>);</div><div class="line">canvas.drawCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, mPaint);</div><div class="line">canvas.drawCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">180</span>, mPaint);</div><div class="line"></div><div class="line"><span class="comment">// 旋转画布 并画线</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">36</span>; i++) &#123;</div><div class="line">	canvas.drawLine(<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">200</span>, mPaint);</div><div class="line">	canvas.rotate(<span class="number">10</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/circleView.png" alt="通过旋转画布实现两圆之间的连线" title="circleView.png"></p>
+<p>2.旋转画布</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">float</span> degrees)</span> </span>&#123;</div><div class="line">    native_rotate(mNativeCanvasWrapper, degrees);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 相对某点缩放</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">float</span> degrees, <span class="keyword">float</span> px, <span class="keyword">float</span> py)</span> </span>&#123;</div><div class="line">    translate(px, py);</div><div class="line">    rotate(degrees);</div><div class="line">    translate(-px, -py);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看下图为相对某点进行缩放，图中的绘制顺序 1.红 2.黄 3.蓝 4.绿</p>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/scale.png" alt="相对某点缩放" title="scale.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">100</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</div><div class="line">mPaint.setColor(Color.RED);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line"></div><div class="line">canvas.translate(<span class="number">200</span>,<span class="number">200</span>); <span class="comment">// 先将坐标系O移动到相对点P</span></div><div class="line">mPaint.setColor(Color.YELLOW);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line"></div><div class="line">canvas.rotate(<span class="number">90</span>);<span class="comment">// 在相对点P处将坐标系O进行旋转 O--&gt;o P--&gt;p</span></div><div class="line">mPaint.setColor(Color.BLUE);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line"></div><div class="line">canvas.translate(-<span class="number">200</span>,-<span class="number">200</span>);<span class="comment">// 将旋转后的坐标系o中的p与P对齐，让以后的操作都仍然相对于P点</span></div><div class="line">mPaint.setColor(Color.GREEN);</div><div class="line">canvas.drawRect(rectF, mPaint);</div></pre></td></tr></table></figure>
+<p>3.缩放画布</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scale</span><span class="params">(<span class="keyword">float</span> sx, <span class="keyword">float</span> sy)</span> </span>&#123;</div><div class="line">    native_scale(mNativeCanvasWrapper, sx, sy);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 相对于某点进行缩放，其相对原理与相对某点旋转相同</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">scale</span><span class="params">(<span class="keyword">float</span> sx, <span class="keyword">float</span> sy, <span class="keyword">float</span> px, <span class="keyword">float</span> py)</span> </span>&#123;</div><div class="line">    translate(px, py);</div><div class="line">    scale(sx, sy);</div><div class="line">    translate(-px, -py);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>缩放比例(sx,sy)取值范围详解：</p>
+<table>
+<thead>
+<tr>
+<th>取值范围(n)</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[-∞, -1)</td>
+<td>先根据缩放中心放大n倍，再根据中心轴进行翻转</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>根据缩放中心轴进行翻转</td>
+</tr>
+<tr>
+<td>(-1, 0)</td>
+<td>先根据缩放中心缩小到n，再根据中心轴进行翻转</td>
+</tr>
+<tr>
+<td>0</td>
+<td>不会显示，若sx为0，则宽度为0，不会显示，sy同理</td>
+</tr>
+<tr>
+<td>(0, 1)</td>
+<td>根据缩放中心缩小到n</td>
+</tr>
+<tr>
+<td>1</td>
+<td>没有变化</td>
+</tr>
+<tr>
+<td>(1, +∞)</td>
+<td>根据缩放中心放大n倍</td>
+</tr>
+</tbody>
+</table>
+<p>负值时，坐标系方向取反，scale(1,-1)这个操作将使得坐标系变为数学中常用坐标系</p>
+<p>旋转，缩放，位移三者应用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 移动画布</span></div><div class="line">canvas.translate(getWidth() / <span class="number">2</span>, getHeight() / <span class="number">2</span>);</div><div class="line"></div><div class="line">mPaint.setColor(Color.BLUE);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</div><div class="line">	canvas.drawCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, mPaint);</div><div class="line">	canvas.drawCircle(<span class="number">0</span>, <span class="number">0</span>, <span class="number">180</span>, mPaint);</div><div class="line">	canvas.rotate(j);</div><div class="line">	<span class="comment">// 旋转画布 并画线![enter description here][6]</span></div><div class="line">	<span class="keyword">for</span> (<span class="keyword">float</span> i = j; i &lt;= <span class="number">360f</span>; i += <span class="number">10f</span>) &#123;</div><div class="line">		canvas.drawLine(<span class="number">0</span>, <span class="number">180</span>, <span class="number">0</span>, <span class="number">200</span>, mPaint);</div><div class="line">		canvas.rotate(<span class="number">10</span>);</div><div class="line">	&#125;</div><div class="line">	canvas.scale(<span class="number">0.75f</span>, <span class="number">0.75f</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/scale_ratote_translate.png" alt="nothing" title="scale_ratote_translate.png"></p>
+<p>4.错切（skew）</p>
+<blockquote>
+<p>错切是在某方向上，按照一定的比例对图形的每个点到某条平行于该方向的直线的有向距离做放缩得到的平面图形。(度娘)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">skew</span><span class="params">(<span class="keyword">float</span> sx, <span class="keyword">float</span> sy)</span> </span>&#123;</div><div class="line">    native_skew(mNativeCanvasWrapper, sx, sy);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">canvas.translate(getWidth()/<span class="number">2</span>,getHeight()/<span class="number">2</span>);</div><div class="line">RectF rectF = <span class="keyword">new</span> RectF(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>);</div><div class="line">mPaint.setColor(Color.RED);</div><div class="line">canvas.drawRect(rectF, mPaint);</div><div class="line"></div><div class="line">canvas.skew(-<span class="number">1</span>,<span class="number">0</span>); <span class="comment">// 向左倾斜45度</span></div><div class="line">canvas.drawRect(rectF, mPaint);</div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="/img/2016-12-30-自定义View高级知识点(一)/skew.png" alt="错切" title="skew.png"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">ahmclishihao</a></p>
+        <p><span>发布时间:</span>2016-12-30, 15:02:40</p>
+        <p><span>最后更新:</span>2017-01-01, 22:22:52</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html" title="2016-12-30-自定义View高级知识点（一）">http://www.lshao.me/2016/12/30/2016-12-30-自定义View高级知识点(一).html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2016/12/30/2016-12-30-自定义View高级知识点(一).html　　作者: ahmclishihao" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/24/2016-12-24-MD控件的使用.html">
+                    MD控件的使用
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Canvas可以画的东西"><span class="toc-number">1.</span> <span class="toc-text">Canvas可以画的东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#颜色混合模式-Alpha通道相关"><span class="toc-number">2.</span> <span class="toc-text">颜色混合模式(Alpha通道相关)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Paint-setXfermode模式"><span class="toc-number">3.</span> <span class="toc-text">Paint.setXfermode模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#onMeasure"><span class="toc-number">4.</span> <span class="toc-text">onMeasure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#paint绘制图形"><span class="toc-number">5.</span> <span class="toc-text">paint绘制图形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作画布"><span class="toc-number">6.</span> <span class="toc-text">操作画布</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"2016-12-30-自定义View高级知识点（一）　| 潜水的沙　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/24/2016-12-24-MD控件的使用.html" title="下一篇: MD控件的使用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 ahmclishihao
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" >Yelee</a> by MOxFIVE 
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
