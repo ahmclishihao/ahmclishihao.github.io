@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="潜水的沙" />
+
+
+
+<meta name="description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017-2-4-Struts2入门">
+<meta property="og:url" content="http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html">
+<meta property="og:site_name" content="潜水的沙">
+<meta property="og:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
+<meta property="og:image" content="http://www.lshao.me/./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
+<meta property="og:updated_time" content="2017-02-13T13:57:14.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017-2-4-Struts2入门">
+<meta name="twitter:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
+<meta name="twitter:image" content="http://www.lshao.me/./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="潜水的沙" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>2017-2-4-Struts2入门 | 潜水的沙</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">潜水的沙</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android，自定义View/">Android，自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaEE/">JavaEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jsp/">Jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Struts2/">Struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvc/">mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">潜水的沙</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">潜水的沙</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-2017-2-4-Struts2入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/04/2017-2-4-Struts2入门.html" class="article-date">
+      <time datetime="2017-02-04T03:25:54.000Z" itemprop="datePublished">2017-02-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2017-2-4-Struts2入门
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Struts2/">Struts2</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Struts的简介：<br>Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a bridge between the application’s Model and the web View.</p>
+<a id="more"></a>
+<h2 id="基本的配置环境"><a href="#基本的配置环境" class="headerlink" title="基本的配置环境"></a>基本的配置环境</h2><p>1、导入以下包（参考struts-blank.war）</p>
+<ul>
+<li>asm-3.3.jar   // asm Java 字节码操纵框架（操控二进制）</li>
+<li>asm-commons-3.3.jar</li>
+<li>asm-tree-3.3.jar</li>
+<li>commons-fileupload-1.3.2.jar  // 上传下载</li>
+<li>commons-io-2.2.jar  // io增强包</li>
+<li>commons-lang3-3.2.jar  // lang增强包</li>
+<li>freemarker-2.3.22.jar  // 页面模版包（struts自身输出页面信息）</li>
+<li>javassist-3.11.0.GA.jar  // 字节码包</li>
+<li>log4j-api-2.3.jar  // 日志框架</li>
+<li>log4j-core-2.3.jar</li>
+<li>ognl-3.0.19.jar  // ognl 表达式</li>
+<li>struts2-core-2.3.31.jar  // 核心库</li>
+<li>xwork-core-2.3.31.jar  // 核心库</li>
+</ul>
+<p>2、配置Filter作为拦截器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">id</span>=<span class="string">"WebApp_9"</span> <span class="attr">version</span>=<span class="string">"2.4"</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span></span></div><div class="line">	<span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- 该拦截器在struts2包中 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>struts2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>3、在classpath的根目录下配置一个strut.xml</p>
+<h2 id="struts-xml的配置"><a href="#struts-xml的配置" class="headerlink" title="struts.xml的配置"></a>struts.xml的配置</h2><p>一个基本的struts.xml内容如下：<br>（其所需DTD在struts包下）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC</span></div><div class="line">	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"</div><div class="line">	"http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 开发模式（更改struts.xml不用重启） --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.devMode"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">constant</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 被拦截action的后缀名（空串或者","都代表无后缀，内部为切割逗号） --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.action.extension"</span> <span class="attr">value</span>=<span class="string">","</span>&gt;</span><span class="tag">&lt;/<span class="name">constant</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 命名空间以“/”开头 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"pck01"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/hello"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"frist"</span> <span class="attr">class</span>=<span class="string">"com.lsh.struts.web.FristAction"</span></span></div><div class="line">			<span class="attr">method</span>=<span class="string">"helloStruts"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"true"</span>&gt;</span>/success.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- 包继成不能继承namespace！！继承后namespace为默认的"" --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"pck02"</span> <span class="attr">extends</span>=<span class="string">"pck01"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"second"</span> <span class="attr">class</span>=<span class="string">"com.lsh.struts.web.SecondAction"</span></span></div><div class="line">			<span class="attr">method</span>=<span class="string">"hiYa"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"true"</span>&gt;</span>/success02.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="struts-xml中实用常量"><a href="#struts-xml中实用常量" class="headerlink" title="struts.xml中实用常量"></a>struts.xml中实用常量</h2><table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>常量值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>struts.i18n.encoding</td>
+<td>UTF-8</td>
+<td>应用中使用的编码</td>
+</tr>
+<tr>
+<td>struts.objectFactory.spring.autoWire</td>
+<td>name</td>
+<td>和spring框架整合有关</td>
+</tr>
+<tr>
+<td>struts.multipart.parser</td>
+<td>jakarta</td>
+<td>指定文件上传用的组件</td>
+</tr>
+<tr>
+<td>struts.multipart.maxSize</td>
+<td>2097152</td>
+<td>文件上传总文件大小限制：2M</td>
+</tr>
+<tr>
+<td>struts.action.extension</td>
+<td>action,,</td>
+<td>能进入Struts2框架内部的url地址后缀名。多个值用逗号分隔</td>
+</tr>
+<tr>
+<td>struts.enable.DynamicMethodInvocation</td>
+<td>false</td>
+<td>是否允许动态方法调用</td>
+</tr>
+<tr>
+<td>struts.devMode    false</td>
+<td>是否是开发模式。</td>
+<td>开发模式：改了配置文件，不需要重启。输出更多的错误信息。开发阶段建议为true。</td>
+</tr>
+<tr>
+<td>struts.ui.theme</td>
+<td>xhtml</td>
+<td>页面展示用的主题</td>
+</tr>
+</tbody>
+</table>
+<h2 id="struts动态方法调用"><a href="#struts动态方法调用" class="headerlink" title="struts动态方法调用"></a>struts动态方法调用</h2><p>action标签中name属性可以使用”*“作为通配符，所以当出现这种情况时，通配符对应的内容可以被{1、2、3、4….}所代替。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.xxx.xxx.ActionSupport"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>&#123;2&#125;page.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="action-中-参数注入"><a href="#action-中-参数注入" class="headerlink" title="action 中 参数注入"></a>action 中 参数注入</h2><p>1、静态注入（注入指定值）<br>在struts.xml中的action下用<param name="key">value注入对应的参数值，同时在ActionSupport中书写 set/get方法。</p>
+<p>2、动态参数注入 一<br>struts.xml无需改动，只写set/get方法即可注入</p>
+<p>如果需要注入一个bean，需为这个bean写set/get，同时请求参数为beanName.paramName的格式，struts会先调用get判断是否存在这个bean，不存在就set，然后再get这个bean去填充参数。</p>
+<p>3、动态参数注入 二<br>实现ModelDriven接口，用此接口的getModel返回指定bean，以此进行填充</p>
+<p>ModelDriven的注入会阻碍其他方法的注入。</p>
+<h2 id="Validation的使用"><a href="#Validation的使用" class="headerlink" title="Validation的使用"></a>Validation的使用</h2><p>作用：<br>在参数注入阶段，对参数进行校验。出现错误时，将提示信息返回到input结果视图。</p>
+<p>原理：</p>
+<p>ValidationAware接口、ValidationAwareSupport支持类、DefaultWorkflowInterceptor拦截器，会拦截action并判断参数的验证是否出现了问题</p>
+<p>ActionSupport实现了ValidationAware 接口，并在 addFieldError(String fieldName, String errorMessage);addActionError(String anErrorMessage);等方法中将错误信息添加到了ValidationAwareSupport中。</p>
+<p>ValidationAwareSupport支持类内部以Map存储了错误信息</p>
+<p>DefaultWorkflowInterceptor拦截器会判断是否存在错误信息，并在拦截器阶段返回 “input” 字段，标识验证失败。</p>
+<p>使用方法：</p>
+<ol>
+<li><p>ActionSupport中都实现了validater接口，validate方法中进行参数校验，出现错误时将错误信息使用addFieldError存放起来。</p>
+<p>2.当一个action中有多个method被调用，且各自需要一种验证方式时，为每个method创建创建一个validate+Method()方法进行校验。</p>
+<p>3.通过xml配置文件配置校验不同的校验。<br>xml名称为：ActionClassName-ActionName-validation.xml （注意时对应action的name不是action类中的method）</p>
+<p>一般写法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE validators PUBLIC</span></div><div class="line">        "-//Apache Struts//XWork Validator Definition 1.0//EN"</div><div class="line">        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">validators</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 以指定参数字段为校验单位，可以为这个字段配置多个校验器 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">field</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">field-validator</span> <span class="attr">type</span>=<span class="string">"requiredstring"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">message</span>&gt;</span>密码不能为空<span class="tag">&lt;/<span class="name">message</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">field-validator</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">field-validator</span> <span class="attr">type</span>=<span class="string">"stringlength"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"maxLength"</span>&gt;</span>18<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"minLength"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">message</span>&gt;</span>密码长度为$&#123;minLength&#125;~$&#123;maxLength&#125;位<span class="tag">&lt;/<span class="name">message</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">field-validator</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">field</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- 以一个验证器为单位进行配置，只能对这个验证器进行一次注入 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">validator</span> <span class="attr">type</span>=<span class="string">"expression"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"expression"</span>&gt;</span>&lt;![CDATA[password == repassword]]&gt;<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">message</span>&gt;</span>两次密码不一致<span class="tag">&lt;/<span class="name">message</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">validator</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">validators</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>默认的校验器 存放路径在 /com/opensymphony/xwork2/validator/validators/default.xml，默认的校验器可以直接使用其name<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">validators</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"required"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.RequiredFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"requiredstring"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.RequiredStringValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"int"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.IntRangeFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"long"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.LongRangeFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"short"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.ShortRangeFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"double"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.DoubleRangeFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"date"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.DateRangeFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"expression"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.ExpressionValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"fieldexpression"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.FieldExpressionValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.EmailValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.URLValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"visitor"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.VisitorFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"conversion"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.ConversionErrorFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"stringlength"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.StringLengthFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"regex"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.RegexFieldValidator"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">validator</span> <span class="attr">name</span>=<span class="string">"conditionalvisitor"</span> <span class="attr">class</span>=<span class="string">"com.opensymphony.xwork2.validator.validators.ConditionalVisitorFieldValidator"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">validators</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>对于不想使用拦截器的method可以添加注解@SkipValidation</p>
+<h2 id="类型转换器"><a href="#类型转换器" class="headerlink" title="类型转换器"></a>类型转换器</h2><p>TypeConvertor</p>
+<h2 id="国际化-i18n"><a href="#国际化-i18n" class="headerlink" title="国际化 i18n"></a>国际化 i18n</h2><h3 id="java中使用国际化"><a href="#java中使用国际化" class="headerlink" title="java中使用国际化"></a>java中使用国际化</h3><p>1、java中使用国际化<br>采用message_zh_cn.properties命名资源文件。<br>并使用ResourceBundle.getBundle（“com.lsh.struts.message“,request.getLoacl()）读取对应的资源文件</p>
+<p>2、struts中的国际化方法 </p>
+<p>搜索顺序为就近原则：</p>
+<p>为全局应用配置一个String资源包，在struts.xml中指定默认的全局String资源包 <constant name="struts.custom.i18n.resources=testmessages,testmessages2" value="com.lsh.struts.resource.xxxxx"></constant></p>
+<p>为指定包下配置一个String资源包 package_zh_cn.properties</p>
+<p>为指定action.class配置一个String资源包 ActionClassName_zh_cn.properties</p>
+<p>使用ActionSupport中TextProvider提供getText等方法可根据key值来获取string。</p>
+<h3 id="jsp中使用国际化"><a href="#jsp中使用国际化" class="headerlink" title="jsp中使用国际化"></a>jsp中使用国际化</h3><p>在jsp页面使用jstl进行国际化。<br>通过action访问jsp时，国际化会查找action的目录下的string资源文件，不适用action访问时使用全局的资源文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--资源搜索的顺序为--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">s:i18n</span> <span class="attr">name</span>=<span class="string">"指定string资源路径"</span>&gt;</span> <span class="comment">&lt;!--不用写后面的zh_cn--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:text</span> <span class="attr">name</span>=<span class="string">"指定string的key"</span>/&gt;</span><span class="comment">&lt;!--单独使用也可以--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">s:i18n</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" alt="jsp下i18n的搜索顺序" title="jsp下i18n的搜索顺序.png"></p>
+<h3 id="单个bean的国际化"><a href="#单个bean的国际化" class="headerlink" title="单个bean的国际化"></a>单个bean的国际化</h3><h2 id="自定义拦截器"><a href="#自定义拦截器" class="headerlink" title="自定义拦截器"></a>自定义拦截器</h2><p>MethodFilterInterceptor和Interceptor</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>文件上传通过fileUpload拦截器进行工作</p>
+<p>action模版代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> File[] program; <span class="comment">// 自动注入 数组的方式是为了支持多文件上传</span></div><div class="line"><span class="keyword">private</span> String[] programFileName; <span class="comment">// 固定格式parameter + FileName 获取文件名</span></div><div class="line"><span class="keyword">private</span> String[] programContentType;  <span class="comment">// 固定个你parameter + ContentType 获取文件MIME类型</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">upExe</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 通过ServletContext获取一个资源的真实路径</span></div><div class="line">	ServletContext servletContext = ServletActionContext</div><div class="line">			.getServletContext();</div><div class="line">	String realPath = servletContext.getRealPath(<span class="string">"/WEB-INF/upfiles"</span>);</div><div class="line"></div><div class="line">	File file = <span class="keyword">new</span> File(realPath);</div><div class="line">	<span class="keyword">if</span> (file.exists()) &#123;</div><div class="line">		<span class="keyword">if</span> (!file.isDirectory()) &#123;</div><div class="line">			file.delete();</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		file.mkdirs();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// 移动至</span></div><div class="line">	program[<span class="number">0</span>].renameTo(<span class="keyword">new</span> File(file, programFileName[<span class="number">0</span>]));</div><div class="line"></div><div class="line">	<span class="keyword">return</span> SUCCESS;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--输出动作上的错误信息，非field错误信息--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">s:actionerror</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--固定格式 entype=”multipart/form-data“ --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">s:form</span> <span class="attr">action</span>=<span class="string">"fileup/upExe"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:file</span> <span class="attr">name</span>=<span class="string">"program"</span> <span class="attr">label</span>=<span class="string">"上传一个文件"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:submit</span> <span class="attr">value</span>=<span class="string">"上传"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">s:form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>更改上传的大小限制：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.multipart.maxSize"</span> <span class="attr">value</span>=<span class="string">"byte为单位"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>限制文件上传的种类：<br>FileUploadInterceptor中有参数限制，<br>1、限制后缀名    allowedTypes<br>2、限制文件类型 allowedExtensions</p>
+<p>使用拦截器注入参数的方式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"defaultStack"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"fileupload.maximumSize"</span>&gt;</span>上传大小byte单位<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"fileupload.allowedTypes"</span>&gt;</span>image/pjpg,image/png<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"fileupload.allowedExtensions"</span>&gt;</span>.jpg.png.gif<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">interceptor-ref</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><p>使用StreamResult流结果视图</p>
+<p>固定格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> InputStream inputStream; <span class="comment">// 指定读取流 给其添加set/get</span></div><div class="line"><span class="keyword">private</span> String filename;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">download</span><span class="params">()</span> </span>&#123;</div><div class="line">	String realPath = ServletActionContext.getServletContext().getRealPath(</div><div class="line">			<span class="string">"/WEB-INF/downfiles/文件名"</span>);</div><div class="line">	filename = <span class="string">"文件名"</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		inputStream = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(realPath));</div><div class="line">	&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> SUCCESS;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"downFile"</span> <span class="attr">class</span>=<span class="string">"com.lsh.struts.action.DownloadAction"</span> <span class="attr">method</span>=<span class="string">"download"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">type</span>=<span class="string">"stream"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 设置响应头：通知浏览器正文的类型，让其以下载的方式打开--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"contentType"</span>&gt;</span>application/octet-stream<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 通知浏览器，以下载的方式打开并通知其下载名称 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"contentDisposition"</span>&gt;</span>attachment;filename=$&#123;filename&#125;<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 将action.class中的读取流设置给结果视图--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"inputName"</span>&gt;</span>inputStream<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="OGNL表达式"><a href="#OGNL表达式" class="headerlink" title="OGNL表达式"></a>OGNL表达式</h2><p>1、Ognl 的Roots节点<br>OgnlContext是一个支持使用ognl表达式进行对象查找的Map集合，他需要一个root节点。</p>
+<p>在Xwork中root节点被CompoundRoot替换成了一个roots节点，并且封装了一个OgnlValueStack类用以处理CompoundRoot节点和调用ognl的解析功能。</p>
+<p>CompoundRoot是一个CopyAndWriteArrayList改造而成的 栈 结构。</p>
+<p>因此roots具备了栈的特性。</p>
+<p>2、向OgnlContext的roots节点中添加数据<br>OgnlValueStack.push(obj);</p>
+<p>3、使用ognl表达式为OgnlContext中的对象属性赋值，和取值。<br>OgnlValueStack.setValue(exper,obj);<br>OgnlValueStack.setParameter(exper,obj);<br>OgnlValueStack.findValue(exper,obj);<br>OgnlValueStack.findString(exper);</p>
+<p>4、其中exper 取roots内容时不用带 “#” 。</p>
+<p>以索引的形式取roots中的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[0].name</div><div class="line">[1].name</div></pre></td></tr></table></figure></p>
+<p>“[ ]”的意思并非真正的索引，其实现方法为下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> CompoundRoot <span class="title">cutStack</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">      <span class="comment">// 剪切index之后的所有元素</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> CompoundRoot(subList(index, size()));</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>即其返回index以后的列表，并在这个列表中查找所指定的属性。</p>
+<p>index从0开始计算。</p>
+<p>则<a href="./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" title="jsp下i18n的搜索顺序.png">1</a>.name代表查找第二个元素之后的所有元素，而不是单指第二个。</p>
+<p>5、特殊方法：</p>
+<ul>
+<li>OgnlValueStack.set(str,obj)<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String key, Object o)</span> </span>&#123;</div><div class="line">       Map setMap = retrieveSetMap();</div><div class="line">       setMap.put(key, o);</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 恢复map</span></div><div class="line">   <span class="function"><span class="keyword">private</span> Map <span class="title">retrieveSetMap</span><span class="params">()</span> </span>&#123;</div><div class="line">       Map setMap;</div><div class="line">       Object topObj = peek();</div><div class="line">       <span class="keyword">if</span> (shouldUseOldMap(topObj)) &#123;</div><div class="line">           setMap = (Map) topObj;</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           setMap = <span class="keyword">new</span> HashMap();</div><div class="line">           setMap.put(MAP_IDENTIFIER_KEY, <span class="string">""</span>);</div><div class="line">           push(setMap);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> setMap;</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 检测该对象是否为包含 MAP_IDENTIFIER_KEY 的map</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">shouldUseOldMap</span><span class="params">(Object topObj)</span> </span>&#123;</div><div class="line">       <span class="keyword">return</span> topObj <span class="keyword">instanceof</span> Map &amp;&amp; ((Map) topObj).get(MAP_IDENTIFIER_KEY) != <span class="keyword">null</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该方法，先检测root栈顶是否为map，不是则重新创建，是则直接返回，将这个map压入栈顶，并将str=obj put到map中去。</p>
+<p>特殊点： 该方法只会检测CompoundRoot的顶部是否有对应的map，一但顶部的原有的map被下压，仍然重新创建一个map。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
+        <p><span>发布时间:</span>2017-02-04, 11:25:54</p>
+        <p><span>最后更新:</span>2017-02-13, 21:57:14</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/04/2017-2-4-Struts2入门.html" title="2017-2-4-Struts2入门">http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/31/2017-1-31-Listener与Filter.html">
+                    2017-1-31-Listener与Filter
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本的配置环境"><span class="toc-number">1.</span> <span class="toc-text">基本的配置环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml的配置"><span class="toc-number">2.</span> <span class="toc-text">struts.xml的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts-xml中实用常量"><span class="toc-number">3.</span> <span class="toc-text">struts.xml中实用常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struts动态方法调用"><span class="toc-number">4.</span> <span class="toc-text">struts动态方法调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#action-中-参数注入"><span class="toc-number">5.</span> <span class="toc-text">action 中 参数注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Validation的使用"><span class="toc-number">6.</span> <span class="toc-text">Validation的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换器"><span class="toc-number">7.</span> <span class="toc-text">类型转换器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#国际化-i18n"><span class="toc-number">8.</span> <span class="toc-text">国际化 i18n</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java中使用国际化"><span class="toc-number">8.1.</span> <span class="toc-text">java中使用国际化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jsp中使用国际化"><span class="toc-number">8.2.</span> <span class="toc-text">jsp中使用国际化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单个bean的国际化"><span class="toc-number">8.3.</span> <span class="toc-text">单个bean的国际化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义拦截器"><span class="toc-number">9.</span> <span class="toc-text">自定义拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件上传"><span class="toc-number">10.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件下载"><span class="toc-number">11.</span> <span class="toc-text">文件下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OGNL表达式"><span class="toc-number">12.</span> <span class="toc-text">OGNL表达式</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"2017-2-4-Struts2入门　| 潜水的沙　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/31/2017-1-31-Listener与Filter.html" title="下一篇: 2017-1-31-Listener与Filter">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/2017-1-20-事务连接池.html">2017-1-20-事务连接池</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/2017-1-18-ee中的小知识.html">2017-1-18-ee中的小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/17/2017-1-17-Jsp的使用.html">2017-1-17-Jsp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/09/2017-1-9-Path的基本使用.html">2017-1-9-Path的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2017-1-1-自定义View高级知识点(二).html">2017-1-1-自定义View高级知识点(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 潜水的沙
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" >Yelee</a> by MOxFIVE 
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="潜水的沙" />
+
+
+
+<meta name="description" content="点击查看内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017-1-31-Listener与Filter">
+<meta property="og:url" content="http://www.lshao.me/2017/01/31/2017-1-31-Listener与Filter.html">
+<meta property="og:site_name" content="潜水的沙">
+<meta property="og:description" content="点击查看内容">
+<meta property="og:updated_time" content="2017-02-13T14:00:34.618Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017-1-31-Listener与Filter">
+<meta name="twitter:description" content="点击查看内容">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="潜水的沙" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>2017-1-31-Listener与Filter | 潜水的沙</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">潜水的沙</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android，自定义View/">Android，自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaEE/">JavaEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jsp/">Jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Struts2/">Struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvc/">mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">潜水的沙</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">潜水的沙</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-2017-1-31-Listener与Filter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/31/2017-1-31-Listener与Filter.html" class="article-date">
+      <time datetime="2017-01-31T06:25:24.000Z" itemprop="datePublished">2017-01-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2017-1-31-Listener与Filter
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaEE/">JavaEE</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p> 点击查看内容</p>
+<a id="more"></a>
+<h2 id="jsonConfig"><a href="#jsonConfig" class="headerlink" title="jsonConfig"></a>jsonConfig</h2><p>jsonConfig可以通过配置不需要的bean属性，在parse阶段过滤指定属性。</p>
+<h2 id="监听器Listener"><a href="#监听器Listener" class="headerlink" title="监听器Listener"></a>监听器Listener</h2><p>实现对应的接口：</p>
+<p>1、监听生命周期 （web.xml 配置listener）<br>HttpSessionListener</p>
+<p>ServletContextListener</p>
+<p>ServletRequestListener</p>
+<p>2、监听属性添加 （web.xml 配置listener）<br>HttpSessionAttributeListener</p>
+<p>ServletContextAttributeListener</p>
+<p>ServletRequestAttributeListener</p>
+<p>3、它是用于监听javaBean对象是否绑定到了session域，用于java bean实现接口得到通知<br>HttpSessionBindingListener</p>
+<p>4、钝化和活化对象 bean实现 HttpSessionActivationListener</p>
+<p>我们还需要个context.xml文件来配置钝化时存储的文件<br>在meta-inf目录下创建一个context.xml文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Context</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">Manager</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.session.PersistentManager"</span> <span class="attr">maxIdleSwap</span>=<span class="string">"1"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Store</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.session.FileStore"</span> <span class="attr">directory</span>=<span class="string">"存储的文件夹名"</span>/&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">Manager</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Filter-过滤器"><a href="#Filter-过滤器" class="headerlink" title="Filter 过滤器"></a>Filter 过滤器</h2><p>Javaweb中的过滤器可以拦截所有访问web资源的请求或响应操作。</p>
+<p>实现Filter后 需在web.xml中进行配置（类似servlet的配置）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span></span></div><div class="line">		<span class="keyword">throws</span> IOException, ServletException &#123;</div><div class="line">	<span class="comment">// 允许当前的request向下传递，不传递无法正常访问</span></div><div class="line">	chain.doFilter(request, response);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一个请求可以被多个Filter拦截，拦截的顺序是web.xml中的配置顺序，<strong>第一个filter会在最后一个filter结束后结束</strong></p>
+<p>生命周期：</p>
+<p>在服务器启动时 init</p>
+<p>在一个请求到来时 doFilter</p>
+<p>在服务器结束时 destroy</p>
+<h3 id="Filter拦截的配置"><a href="#Filter拦截的配置" class="headerlink" title="Filter拦截的配置"></a>Filter拦截的配置</h3><p>拦截指定的servlet(不用再写url-pattern)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>MyFilter2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>xxxx<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>拦截一次request的转发和请求</p>
+<p>filter会配置所拦截的所有方式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>MyFilter2<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>FORWARD<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dispatcher</span>&gt;</span>REQUEST<span class="tag">&lt;/<span class="name">dispatcher</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h2><p>Java在其网络传输中使用的是iso-8859-1格式的编码。因为iso-8859-1是一种单字节只支持0-255的编码方式。</p>
+<p>在JSP页面获取表单的值时会出现乱码，有两种解决方法：</p>
+<p>1.post 在调用getParameter之前通过request.setCharacterEncoding设置字符编码</p>
+<p>2.get 调用new String(str.getBytes(“iso8859-1”), “UTF-8”);编码后解码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// java判断是否可以解码</span></div><div class="line">Charset.forName(<span class="string">"UTF-8"</span>).newEncoder().canEncode(req.getParameter(<span class="string">"id"</span>))</div></pre></td></tr></table></figure>
+<p><strong>new String(str.getBytes(“iso8859-1”), “UTF-8”);该方法仅仅是在出现浏览器不以U8转换URL时才会使用到</strong></p>
+<p>js中也可以将uri转换为u8格式的url</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">enc</span>(<span class="params">uri</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> u = <span class="built_in">encodeURI</span>(uri);</div><div class="line">	alert(u);</div><div class="line">	location.href = u;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="动态代理-aop"><a href="#动态代理-aop" class="headerlink" title="动态代理+aop"></a>动态代理+aop</h2><p>代理机制需要两个要素：1、被代理对象 2、代理对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getPoxy</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 被代理对象</span></div><div class="line">	<span class="keyword">final</span> MyFilter myFilter = <span class="keyword">new</span> MyFilter();</div><div class="line">	</div><div class="line">	<span class="comment">// 代理对象</span></div><div class="line">	<span class="keyword">return</span> Proxy.newProxyInstance(classLoader<span class="string">"被代理对象的加载器"</span>, interfaces[]“被代理对象所具有的接口对象”,invokeHandler“调用方法的处理类”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>AOP 将对应的方法在调用前进行拦截，并穿插其他的信息，从而保证原调用方法不被改动<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getPoxy</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">final</span> MyFilter myFilter = <span class="keyword">new</span> MyFilter();</div><div class="line">	<span class="keyword">return</span> Proxy.newProxyInstance(MyFilter.class.getClassLoader(), MyFilter.class.getInterfaces(),</div><div class="line">			<span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">				<span class="comment">// 返回调用方法的结构</span></div><div class="line">				<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">					...</div><div class="line">					Object result = method.invoke(myFilter, args);</div><div class="line">					...</div><div class="line">					<span class="keyword">return</span> result;</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
+        <p><span>发布时间:</span>2017-01-31, 14:25:24</p>
+        <p><span>最后更新:</span>2017-02-13, 22:00:34</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/31/2017-1-31-Listener与Filter.html" title="2017-1-31-Listener与Filter">http://www.lshao.me/2017/01/31/2017-1-31-Listener与Filter.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/01/31/2017-1-31-Listener与Filter.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/04/2017-2-4-Struts2入门.html">
+                    2017-2-4-Struts2入门
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/20/2017-1-20-事务连接池.html">
+                    2017-1-20-事务连接池
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#jsonConfig"><span class="toc-number">1.</span> <span class="toc-text">jsonConfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监听器Listener"><span class="toc-number">2.</span> <span class="toc-text">监听器Listener</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Filter-过滤器"><span class="toc-number">3.</span> <span class="toc-text">Filter 过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Filter拦截的配置"><span class="toc-number">3.1.</span> <span class="toc-text">Filter拦截的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码方式"><span class="toc-number">4.</span> <span class="toc-text">编码方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理-aop"><span class="toc-number">5.</span> <span class="toc-text">动态代理+aop</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"2017-1-31-Listener与Filter　| 潜水的沙　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/04/2017-2-4-Struts2入门.html" title="上一篇: 2017-2-4-Struts2入门">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/20/2017-1-20-事务连接池.html" title="下一篇: 2017-1-20-事务连接池">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/2017-1-20-事务连接池.html">2017-1-20-事务连接池</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/2017-1-18-ee中的小知识.html">2017-1-18-ee中的小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/17/2017-1-17-Jsp的使用.html">2017-1-17-Jsp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/09/2017-1-9-Path的基本使用.html">2017-1-9-Path的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2017-1-1-自定义View高级知识点(二).html">2017-1-1-自定义View高级知识点(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 潜水的沙
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" >Yelee</a> by MOxFIVE 
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
