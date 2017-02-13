@@ -90,9 +90,12 @@ require([], function (){
                 var animationNames = [
                 "pulse", "fadeIn","fadeInRight", "flipInX", "lightSpeedIn","rotateInUpLeft", "slideInUp","zoomIn",
                 ],
-                len = animationNames.length,
-                randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
+				//随机动画效果
+                //len = animationNames.length,
+                //randomAnimationName = animationNames[Math.ceil(Math.random() * len) - 1];
 
+				randomAnimationName = animationNames[6];
+				
                 // Fallback (CSS3 keyframe, requestAnimationFrame)
                 if (!window.requestAnimationFrame) {
                     $('.body-wrap > article').css({opacity: 1});
