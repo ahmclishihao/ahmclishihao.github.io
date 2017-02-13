@@ -21,12 +21,12 @@
 <meta property="og:url" content="http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html">
 <meta property="og:site_name" content="潜水的沙">
 <meta property="og:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
-<meta property="og:image" content="http://www.lshao.me/./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
-<meta property="og:updated_time" content="2017-02-13T13:57:14.494Z">
+<meta property="og:image" content="http://www.lshao.me/img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
+<meta property="og:updated_time" content="2017-02-13T14:08:41.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2017-2-4-Struts2入门">
 <meta name="twitter:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
-<meta name="twitter:image" content="http://www.lshao.me/./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
+<meta name="twitter:image" content="http://www.lshao.me/img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -390,7 +390,7 @@
 <p>使用ActionSupport中TextProvider提供getText等方法可根据key值来获取string。</p>
 <h3 id="jsp中使用国际化"><a href="#jsp中使用国际化" class="headerlink" title="jsp中使用国际化"></a>jsp中使用国际化</h3><p>在jsp页面使用jstl进行国际化。<br>通过action访问jsp时，国际化会查找action的目录下的string资源文件，不适用action访问时使用全局的资源文件。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--资源搜索的顺序为--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">s:i18n</span> <span class="attr">name</span>=<span class="string">"指定string资源路径"</span>&gt;</span> <span class="comment">&lt;!--不用写后面的zh_cn--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">s:text</span> <span class="attr">name</span>=<span class="string">"指定string的key"</span>/&gt;</span><span class="comment">&lt;!--单独使用也可以--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">s:i18n</span>&gt;</span></div></pre></td></tr></table></figure>
-<p><img src="./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" alt="jsp下i18n的搜索顺序" title="jsp下i18n的搜索顺序.png"></p>
+<p><img src="/img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" alt="jsp下i18n的搜索顺序" title="jsp下i18n的搜索顺序.png"></p>
 <h3 id="单个bean的国际化"><a href="#单个bean的国际化" class="headerlink" title="单个bean的国际化"></a>单个bean的国际化</h3><h2 id="自定义拦截器"><a href="#自定义拦截器" class="headerlink" title="自定义拦截器"></a>自定义拦截器</h2><p>MethodFilterInterceptor和Interceptor</p>
 <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>文件上传通过fileUpload拦截器进行工作</p>
 <p>action模版代码：</p>
@@ -415,7 +415,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> CompoundRoot <span class="title">cutStack</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">      <span class="comment">// 剪切index之后的所有元素</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> CompoundRoot(subList(index, size()));</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
 <p>即其返回index以后的列表，并在这个列表中查找所指定的属性。</p>
 <p>index从0开始计算。</p>
-<p>则<a href="./img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" title="jsp下i18n的搜索顺序.png">1</a>.name代表查找第二个元素之后的所有元素，而不是单指第二个。</p>
+<p>则<a href="/img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png" title="jsp下i18n的搜索顺序.png">1</a>.name代表查找第二个元素之后的所有元素，而不是单指第二个。</p>
 <p>5、特殊方法：</p>
 <ul>
 <li>OgnlValueStack.set(str,obj)<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(String key, Object o)</span> </span>&#123;</div><div class="line">       Map setMap = retrieveSetMap();</div><div class="line">       setMap.put(key, o);</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 恢复map</span></div><div class="line">   <span class="function"><span class="keyword">private</span> Map <span class="title">retrieveSetMap</span><span class="params">()</span> </span>&#123;</div><div class="line">       Map setMap;</div><div class="line">       Object topObj = peek();</div><div class="line">       <span class="keyword">if</span> (shouldUseOldMap(topObj)) &#123;</div><div class="line">           setMap = (Map) topObj;</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           setMap = <span class="keyword">new</span> HashMap();</div><div class="line">           setMap.put(MAP_IDENTIFIER_KEY, <span class="string">""</span>);</div><div class="line">           push(setMap);</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> setMap;</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 检测该对象是否为包含 MAP_IDENTIFIER_KEY 的map</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">shouldUseOldMap</span><span class="params">(Object topObj)</span> </span>&#123;</div><div class="line">       <span class="keyword">return</span> topObj <span class="keyword">instanceof</span> Map &amp;&amp; ((Map) topObj).get(MAP_IDENTIFIER_KEY) != <span class="keyword">null</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
@@ -434,7 +434,7 @@
         <p><span>本文标题:</span><a href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
         <p><span>发布时间:</span>2017-02-04, 11:25:54</p>
-        <p><span>最后更新:</span>2017-02-13, 21:57:14</p>
+        <p><span>最后更新:</span>2017-02-13, 22:08:41</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/04/2017-2-4-Struts2入门.html" title="2017-2-4-Struts2入门">http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
