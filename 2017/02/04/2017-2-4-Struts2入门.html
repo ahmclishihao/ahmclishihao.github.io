@@ -22,7 +22,9 @@
 <meta property="og:site_name" content="潜水的沙">
 <meta property="og:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
 <meta property="og:image" content="http://www.lshao.me/img/2017-2-4-Struts2入门/jsp下i18n的搜索顺序.png">
-<meta property="og:updated_time" content="2017-02-13T14:29:29.412Z">
+<meta property="og:image" content="http://www.lshao.me/img/2017-2-4-Struts2入门/struts数据结构详解.png">
+<meta property="og:image" content="http://www.lshao.me/img/2017-2-4-Struts2入门/Struts2结构图.png">
+<meta property="og:updated_time" content="2017-03-02T04:19:11.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2017-2-4-Struts2入门">
 <meta name="twitter:description" content="Struts的简介：Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a">
@@ -180,7 +182,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android，自定义View/">Android，自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaEE/">JavaEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jsp/">Jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Struts2/">Struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvc/">mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android，自定义View/">Android，自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaEE/">JavaEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jsp/">Jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Struts2/">Struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvc/">mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
                     </div>
                 </section>
                 
@@ -267,7 +269,7 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java-EE/">Java EE</a>
+    <a class="article-category-link" href="/categories/JavaEE/">JavaEE</a>
     </div>
 
 
@@ -359,6 +361,7 @@
 <h2 id="struts动态方法调用"><a href="#struts动态方法调用" class="headerlink" title="struts动态方法调用"></a>struts动态方法调用</h2><p>action标签中name属性可以使用”*“作为通配符，所以当出现这种情况时，通配符对应的内容可以被{1、2、3、4….}所代替。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.xxx.xxx.ActionSupport"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>&#123;2&#125;page.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="action-中-参数注入"><a href="#action-中-参数注入" class="headerlink" title="action 中 参数注入"></a>action 中 参数注入</h2><p>1、静态注入（注入指定值）<br>在struts.xml中的action下用<param name="key">value注入对应的参数值，同时在ActionSupport中书写 set/get方法。</p>
+<p>在result 结果视图为redirectAction的情况下，可以通过ognl的方式将参数传给重定向的Action。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"reply"</span> <span class="attr">method</span>=<span class="string">"reply"</span></span></div><div class="line">	<span class="attr">class</span>=<span class="string">"com.lsh.demo.web.action.ShowTopicAction"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">type</span>=<span class="string">"redirectAction"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"actionName"</span>&gt;</span>showTopic<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 传递静态参数给重定向的Action--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"topicId"</span>&gt;</span>$&#123;topicId&#125;<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>2、动态参数注入 一<br>struts.xml无需改动，只写set/get方法即可注入</p>
 <p>如果需要注入一个bean，需为这个bean写set/get，同时请求参数为beanName.paramName的格式，struts会先调用get判断是否存在这个bean，不存在就set，然后再get这个bean去填充参数。</p>
 <p>3、动态参数注入 二<br>实现ModelDriven接口，用此接口的getModel返回指定bean，以此进行填充</p>
@@ -423,6 +426,11 @@
 </ul>
 <p>该方法，先检测root栈顶是否为map，不是则重新创建，是则直接返回，将这个map压入栈顶，并将str=obj put到map中去。</p>
 <p>特殊点： 该方法只会检测CompoundRoot的顶部是否有对应的map，一但顶部的原有的map被下压，仍然重新创建一个map。</p>
+<p>6、jsp中强制使用ognl表达式</p>
+<p>在一些struts-tags的属性中使用 “ %{ognl expression} “</p>
+<p>7、ognl表达式中可以使用四则运算</p>
+<p><img src="/img/2017-2-4-Struts2入门/struts数据结构详解.png" alt="Struts2 的contextMap数据结构" title="struts数据结构详解.png"></p>
+<p><img src="/img/2017-2-4-Struts2入门/Struts2结构图.png" alt="Struts2结构图" title="Struts2结构图.png"></p>
 
       
     </div>
@@ -434,7 +442,7 @@
         <p><span>本文标题:</span><a href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
         <p><span>发布时间:</span>2017-02-04, 11:25:54</p>
-        <p><span>最后更新:</span>2017-02-13, 22:29:29</p>
+        <p><span>最后更新:</span>2017-03-02, 12:19:11</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/04/2017-2-4-Struts2入门.html" title="2017-2-4-Struts2入门">http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/02/04/2017-2-4-Struts2入门.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -448,6 +456,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/13/2017-2-13-Hibernate.html">
+                    2017-2-13-Hibernate
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -495,7 +509,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/02/13/2017-2-13-Hibernate.html" title="上一篇: 2017-2-13-Hibernate">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -507,7 +523,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/2017-1-20-事务连接池.html">2017-1-20-事务连接池</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/2017-1-18-ee中的小知识.html">2017-1-18-ee中的小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/17/2017-1-17-Jsp的使用.html">2017-1-17-Jsp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/09/2017-1-9-Path的基本使用.html">2017-1-9-Path的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2017-1-1-自定义View高级知识点(二).html">2017-1-1-自定义View高级知识点(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/2017-2-22-Spring（一）.html">2017-2-22-Spring（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/2017-2-13-Hibernate.html">2017-2-13-Hibernate</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/2017-1-20-事务连接池.html">2017-1-20-事务连接池</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/2017-1-18-ee中的小知识.html">2017-1-18-ee中的小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/17/2017-1-17-Jsp的使用.html">2017-1-17-Jsp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/09/2017-1-9-Path的基本使用.html">2017-1-9-Path的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2017-1-1-自定义View高级知识点(二).html">2017-1-1-自定义View高级知识点(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
 
 
 

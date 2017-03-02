@@ -4,6 +4,161 @@
   
     
     <entry>
+      <title><![CDATA[2017-2-22-Spring（一）]]></title>
+      <url>http://www.lshao.me/2017/02/22/2017-2-22-Spring%EF%BC%88%E4%B8%80%EF%BC%89.html</url>
+      <content type="html"><![CDATA[<p>点击查看内容</p>
+<a id="more"></a>
+<h2 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h2><p>Spring核心内容：bean、core、context、expression language</p>
+<h2 id="BeanFactory和ApplicationContext的区别"><a href="#BeanFactory和ApplicationContext的区别" class="headerlink" title="BeanFactory和ApplicationContext的区别"></a>BeanFactory和ApplicationContext的区别</h2><p>1、加载问题<br>beanFactory会具备懒加载，只有在getBean的时候才会加载bean<br>applicationContext<strong><em>会立即加载配置文件中的所有bean</em></strong><br>2、applicationContext更强大<br>applicationContext可以进行国际化处理、事件传递、Bean自动装配、各种不同应用层的Context实现</p>
+<h2 id="Bean文件详解"><a href="#Bean文件详解" class="headerlink" title="Bean文件详解"></a>Bean文件详解</h2><h3 id="Bean的生成方式"><a href="#Bean的生成方式" class="headerlink" title="Bean的生成方式"></a>Bean的生成方式</h3><p>1、默认构造<br>即普通的bean声明方式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 默认构造 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.UserServiceImpl"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2、静态工厂构造<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 静态工厂 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.StaticFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getUserService"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3、实例工厂构造<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 实例工厂 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myFactory"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.InstanceFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService02"</span> <span class="attr">factory-bean</span>=<span class="string">"myFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getUserService"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h3><p>spring提供的工厂包装bean，实现factoryBean接口后，spring将加载首先加载该接口。</p>
+<p>起到懒加载的作用。</p>
+<p><strong><em>但是用这种方式后需要手动进行依赖注入。</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">&lt;!-- FactoryBean 一个实现了工厂的bean每次实例时，都是通过工厂创建，而不是直接的实例</span></div><div class="line">   	spring内部调用其getObject方法获取实例</div><div class="line">    --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.c_factorybean.MyFactoryBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">		String xmlPath = <span class="string">"com/lsh/spring/c_factorybean/applicationContext.xml"</span>;</div><div class="line">		<span class="comment">// bean不会被立即加载UserService而是调用getBean时才会加载</span></div><div class="line">		ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">				xmlPath);</div><div class="line">		IUserService userService = (IUserService) applicationContext</div><div class="line">				.getBean(<span class="string">"userService"</span>);</div><div class="line">		userService.serviceMethod();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="scope-作用域"><a href="#scope-作用域" class="headerlink" title="scope 作用域"></a>scope 作用域</h3><p>指定生成的bean是否为单例或者多例，默认为单例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">scope</span>=<span class="string">""</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>singleton : 单例<br>prototype : 多例</p>
+<p>对于FactoryBean生产的bean需要在scope和isSingleton同时为单例的情况下才能生成单例的实例。</p>
+<h3 id="lifecycle-生命周期"><a href="#lifecycle-生命周期" class="headerlink" title="lifecycle 生命周期"></a>lifecycle 生命周期</h3><p>xml 中 指定对应 init和destory方法，spring自动调用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.d_lifecycle.UserServiceImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destroy"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="BeanPostProcessor-回调"><a href="#BeanPostProcessor-回调" class="headerlink" title="BeanPostProcessor 回调"></a>BeanPostProcessor 回调</h3><p>BeanPostProcessor会在对象的init方法前后分别执行，开发者可以在此时对对象进行加工或者替换，但是<strong><em>对象销毁时仍然使用源对象的destroy方法</em></strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 声明一个BeanPostProcessor，提供给Spring回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.d_lifecycle.MyBeanPostProcessor"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span></span></div><div class="line">		<span class="keyword">throws</span> BeansException &#123;</div><div class="line">	System.out.println(<span class="string">"MyBeanPostProcessor postProcessBefore "</span>);</div><div class="line">	<span class="keyword">return</span> bean;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">postProcessAfterInitialization</span><span class="params">(<span class="keyword">final</span> Object bean,</span></span></div><div class="line">		String beanName)</div><div class="line">		<span class="keyword">throws</span> BeansException &#123;</div><div class="line">	System.out.println(<span class="string">"MyBeanPostProcessor postProcessAfter "</span>);</div><div class="line">	<span class="keyword">return</span> Proxy.newProxyInstance(</div><div class="line">			MyBeanPostProcessor.class.getClassLoader(),</div><div class="line">			UserServiceImpl.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">				<span class="meta">@Override</span></div><div class="line">				<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method,</span></span></div><div class="line">						Object[] args) <span class="keyword">throws</span> Throwable &#123;</div><div class="line">					String name = method.getName();</div><div class="line">					System.out.println(<span class="string">"开始调用"</span> + name + <span class="string">" 已经记录和处理"</span>);</div><div class="line">					Object methodResult = method.invoke(bean, args);</div><div class="line">					System.out.println(<span class="string">"结束调用"</span> + name + <span class="string">"已经记录和处理"</span>);</div><div class="line">					<span class="keyword">return</span> methodResult;</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl construct</div><div class="line">MyBeanPostProcessor postProcessBefore  ------------------------ &gt;&gt;&gt; postProcessor开始执行</div><div class="line">CopyOfMyBeanPostProcessor postProcessBefore </div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl init</div><div class="line">MyBeanPostProcessor postProcessAfter </div><div class="line"></div><div class="line">CopyOfMyBeanPostProcessor postProcessAfter </div><div class="line">Copy 开始调用serviceMethod 已经记录和处理 ------------------------&gt;&gt;&gt;已经转为代理类</div><div class="line">开始调用serviceMethod 已经记录和处理</div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl serviceMethod ------------------&gt;&gt;&gt;代理类中调用了源实例的方法</div><div class="line">结束调用serviceMethod已经记录和处理</div><div class="line">Copy 结束调用serviceMethod已经记录和处理</div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl destroy ---------------&gt;&gt;&gt;调用了destroy</div></pre></td></tr></table></figure>
+<h3 id="P命令空间"><a href="#P命令空间" class="headerlink" title="P命令空间"></a>P命令空间</h3><p>可以简化get/set方法，在参数注入时不用再去书写<property>&lt;/~&gt;类似的二级节点，类似android的配置文件。<br>使用时写上命名空间，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">	   <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	   <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></div><div class="line">	   <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></div><div class="line">						   http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;</div><div class="line"> <span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></property></p>
+<h3 id="SpEL"><a href="#SpEL" class="headerlink" title="SpEL"></a>SpEL</h3><p>对<code>&lt;property&gt;</code>进行统一编程，所有的内容都使用value<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"#&#123;表达式&#125;"</span>&gt;</span></div><div class="line">#&#123;123&#125;、#&#123;'jack'&#125; ： 数字、字符串</div><div class="line">#&#123;beanId&#125;	：另一个bean引用</div><div class="line">#&#123;beanId.propName&#125;	：操作数据</div><div class="line">#&#123;beanId.toString()&#125;	：执行方法</div><div class="line">#&#123;T(类).字段|方法&#125;	：静态方法或字段</div></pre></td></tr></table></figure></p>
+<h2 id="spring常用注解"><a href="#spring常用注解" class="headerlink" title="spring常用注解"></a>spring常用注解</h2><p>使用注解时需要添加命名空间，并配置要扫描的包，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">	   <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	   <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">	   <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></div><div class="line">						   http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">						   http://www.springframework.org/schema/context </div><div class="line">						   http://www.springframework.org/schema/context/spring-context.xsd"&gt;</div><div class="line">	<span class="comment">&lt;!-- 开启扫描 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.lsh.spring.e_di"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>常用替代bean配置的注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@component</span> <span class="comment">// 指定一个bean，以下三个为component的衍生注解</span></div><div class="line"><span class="meta">@Controller</span> <span class="comment">// 指明是一个control层</span></div><div class="line"><span class="meta">@Service</span> <span class="comment">// 指明是一个Service层</span></div><div class="line"><span class="meta">@Repository</span> <span class="comment">// 指明是一个dao层</span></div><div class="line"></div><div class="line"><span class="meta">@Value</span> <span class="comment">// 注入参数</span></div><div class="line"><span class="meta">@Autowired</span> <span class="comment">// 自动装配，可写在变量名上，也可写在set方法上</span></div><div class="line"></div><div class="line"><span class="meta">@Scope</span>(ConfigurableBeanFactory.SCOPE_PROTOTYPE) <span class="comment">// 指明参数的作用域 单例(singleton)或者多例(prototype)</span></div></pre></td></tr></table></figure></p>
+<p>即使，使用了注解setter方法也是不可避免的，需要添加setter方法才可以注入。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[2017-2-13-Hibernate]]></title>
+      <url>http://www.lshao.me/2017/02/13/2017-2-13-Hibernate.html</url>
+      <content type="html"><![CDATA[<p>点击查看内容</p>
+<a id="more"></a>
+<h2 id="Hibernate中的小知识"><a href="#Hibernate中的小知识" class="headerlink" title="Hibernate中的小知识"></a>Hibernate中的小知识</h2><p>1、每一个线程的Session在事务提交的时候，会自动关闭并从当前线程删除。</p>
+<p>2、HQL 每次都重新去查询（发送sql），而不是从一级缓存中获取</p>
+<p>3、HQL 会将结果放入一级缓存中</p>
+<p>4、persist和save方法的区别</p>
+<pre><code>- persist将会完整的持久化bean对象，所以对应的主键不能自己配置（除非主键自增策略为assigned）
+- save方法中，每次都重新设置id
+</code></pre><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><p>外键：如果公共关键字在一个关系中是主关键字，那么这个公共关键字被称为另一个关系的外键。由此可见，外键表示了两个关系之间的相关联系。以另一个关系的外键作主关键字的表被称为主表，具有此外键的表被称为主表的从表。外键又称作外关键字。</p>
+<h3 id="控制权限-inverse"><a href="#控制权限-inverse" class="headerlink" title="控制权限 inverse"></a>控制权限 inverse</h3><p>inverse表示 外键的维护权限是否反转。</p>
+<h3 id="级联操作-cascade"><a href="#级联操作-cascade" class="headerlink" title="级联操作 cascade"></a>级联操作 cascade</h3><h2 id="加载策略"><a href="#加载策略" class="headerlink" title="加载策略"></a>加载策略</h2><h3 id="类加载策略"><a href="#类加载策略" class="headerlink" title="类加载策略"></a>类加载策略</h3><p>get/load方法。。</p>
+<p>默认：load方法是在对象的属性被调用的时候才发送语句查询，被称为懒加载(lazy)。<br>其配置属性为:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 懒加载默认是开启的 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"Student"</span> <span class="attr">table</span>=<span class="string">"t_student"</span> <span class="attr">lazy</span>=<span class="string">"true"</span> &gt;</span></div><div class="line">	</div><div class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="关联级别懒加载"><a href="#关联级别懒加载" class="headerlink" title="关联级别懒加载"></a>关联级别懒加载</h3><p>默认：所关联的数据，在使用时才开始加载其数据。</p>
+<p>关联级别的加载受两个属性控制：</p>
+<pre><code>&lt;set&gt;
+    lazy：是否使用懒加载
+    fetch：加载集合使用的sql语句种类
+        select ： 普通的select查询
+        join：表链接语句
+        subselect：子查询加载
+</code></pre><h3 id="join语句的规则"><a href="#join语句的规则" class="headerlink" title="join语句的规则"></a>join语句的规则</h3><p>其各有四条记录，其中有两条记录是相同的，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tom</td>
+<td>1</td>
+<td>Rutabaga</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jack</td>
+<td>2</td>
+<td>Jerry</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rose</td>
+<td>3</td>
+<td>Tom</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Jerry</td>
+<td>4</td>
+<td>Ninja</td>
+</tr>
+</tbody>
+</table>
+<p>那么对应的join语句有如下五种情况：</p>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>sql结果</th>
+<th>图形表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/inner_join.png" alt="inner_join" title="inner_join.png"></td>
+</tr>
+<tr>
+<td><code>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/full_outer_join.png" alt="full_outer_join" title="full_outer_join.png"></td>
+</tr>
+<tr>
+<td><code>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/left_outer_join.png" alt="left_outer_join" title="left_outer_join.png"></td>
+</tr>
+<tr>
+<td><code>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null</code></td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/left_outer_isnull.png" alt="left_outer_isnull" title="left_outer_isnull.png"></td>
+</tr>
+<tr>
+<td><code>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null</code></td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/full_join_isnull.png" alt="full_join_isnull" title="full_join_isnull.png"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="HQL详解"><a href="#HQL详解" class="headerlink" title="HQL详解"></a>HQL详解</h2><h2 id="使用C3P0的连接池"><a href="#使用C3P0的连接池" class="headerlink" title="使用C3P0的连接池"></a>使用C3P0的连接池</h2><p>先导入c3p0的jar包，再更改hibernate.cfg中的：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.provider_class"</span>&gt;</span>org.hibernate.connection.C3P0ConnectionProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>同时还可以配置更多的C3P0的属性，如下：</p>
+<p>#hibernate.c3p0.max_size 2</p>
+<p>#hibernate.c3p0.min_size 2</p>
+<p>#hibernate.c3p0.timeout 5000</p>
+<p>#hibernate.c3p0.max_statements 100</p>
+<p>#hibernate.c3p0.idle_test_period 3000</p>
+<p>#hibernate.c3p0.acquire_increment 2</p>
+<p>#hibernate.c3p0.validate false</p>
+<h2 id="数据库的锁"><a href="#数据库的锁" class="headerlink" title="数据库的锁"></a>数据库的锁</h2><p>解决并发问题</p>
+<p>悲观锁：<br>    读锁：select <em> from t_xxxx lock in share mode; (该锁可被所有人使用)<br>    写锁：select </em> from t_xxxx for update; (该锁会造成阻塞)</p>
+<p>乐观锁：</p>
+<h2 id="一对一多表设计"><a href="#一对一多表设计" class="headerlink" title="一对一多表设计"></a>一对一多表设计</h2><h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>二级缓存是进程级别的缓存。</p>
+<p>1.一级缓存的主要优化手段是快照。</p>
+<p>添加缓存的方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 启用二级缓存 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.use_second_level_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缓存的提供类 ehcache --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.provider_class"</span>&gt;</span>org.hibernate.cache.EhCacheProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 哪个类需要缓存 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.lsh.hibernate.domain.Student"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="类缓存区"><a href="#类缓存区" class="headerlink" title="类缓存区"></a>类缓存区</h3><p>类缓存的方式：<br>类缓存并非将数据一对象的形式缓存，而是缓存成散列数据，在一级缓存中组装成对象。</p>
+<h3 id="集合缓存区"><a href="#集合缓存区" class="headerlink" title="集合缓存区"></a>集合缓存区</h3><p>集合缓存的方式：<br>集合缓存会将集合中每个对象的id存放起来，在使用时去类缓存中查询，集合缓存，也必须声明缓存集合中的元素。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.lsh.hibernate.domain.Course"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">collection-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">collection</span>=<span class="string">"com.lsh.hibernate.domain.Student.courses"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="查询缓存区"><a href="#查询缓存区" class="headerlink" title="查询缓存区"></a>查询缓存区</h3><p>对HQL语句进行缓存，通过<code>setCachable(true)</code>开启查询缓存。<br>查询缓存会将查询到的结果的id存储起来，再此查询的时候通过id到类缓存中查找。</p>
+<p>查询缓存内部是将HQL语句所对应的SQL语句与要缓存的id一同存储起来，<br>所以“select c from Customer c”与”from Customer”会得到相同的结果。</p>
+<h2 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h2><p>1、Hibernate中配置集合不一定只使用set，使用bag可以通过order-by参数添加排序方式</p>
+<bag name="replies" cascade="save-update" order-by="id asc"><br>            <key column="tid"></key><br>            <one-to-many class="Reply"><br></one-to-many></bag>
+
+<p>2、Hibernate配置bean中的类型与sql中的类型<br><img src="/img/2017-2-13-Hibernate/hibernate中属性的对应参数.png" alt="类型对应" title="hibernate中属性的对应参数.png"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[2017-2-4-Struts2入门]]></title>
       <url>http://www.lshao.me/2017/02/04/2017-2-4-Struts2%E5%85%A5%E9%97%A8.html</url>
       <content type="html"><![CDATA[<p>Struts的简介：<br>Struts is a Model View Controller framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework’s Controller acts as a bridge between the application’s Model and the web View.</p>
@@ -82,6 +237,7 @@
 <h2 id="struts动态方法调用"><a href="#struts动态方法调用" class="headerlink" title="struts动态方法调用"></a>struts动态方法调用</h2><p>action标签中name属性可以使用”*“作为通配符，所以当出现这种情况时，通配符对应的内容可以被{1、2、3、4….}所代替。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.xxx.xxx.ActionSupport"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>&#123;2&#125;page.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="action-中-参数注入"><a href="#action-中-参数注入" class="headerlink" title="action 中 参数注入"></a>action 中 参数注入</h2><p>1、静态注入（注入指定值）<br>在struts.xml中的action下用<param name="key">value注入对应的参数值，同时在ActionSupport中书写 set/get方法。</p>
+<p>在result 结果视图为redirectAction的情况下，可以通过ognl的方式将参数传给重定向的Action。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"reply"</span> <span class="attr">method</span>=<span class="string">"reply"</span></span></div><div class="line">	<span class="attr">class</span>=<span class="string">"com.lsh.demo.web.action.ShowTopicAction"</span>&gt;</div><div class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">type</span>=<span class="string">"redirectAction"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"actionName"</span>&gt;</span>showTopic<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 传递静态参数给重定向的Action--&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"topicId"</span>&gt;</span>$&#123;topicId&#125;<span class="tag">&lt;/<span class="name">param</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>2、动态参数注入 一<br>struts.xml无需改动，只写set/get方法即可注入</p>
 <p>如果需要注入一个bean，需为这个bean写set/get，同时请求参数为beanName.paramName的格式，struts会先调用get判断是否存在这个bean，不存在就set，然后再get这个bean去填充参数。</p>
 <p>3、动态参数注入 二<br>实现ModelDriven接口，用此接口的getModel返回指定bean，以此进行填充</p>
@@ -146,6 +302,11 @@
 </ul>
 <p>该方法，先检测root栈顶是否为map，不是则重新创建，是则直接返回，将这个map压入栈顶，并将str=obj put到map中去。</p>
 <p>特殊点： 该方法只会检测CompoundRoot的顶部是否有对应的map，一但顶部的原有的map被下压，仍然重新创建一个map。</p>
+<p>6、jsp中强制使用ognl表达式</p>
+<p>在一些struts-tags的属性中使用 “ %{ognl expression} “</p>
+<p>7、ognl表达式中可以使用四则运算</p>
+<p><img src="/img/2017-2-4-Struts2入门/struts数据结构详解.png" alt="Struts2 的contextMap数据结构" title="struts数据结构详解.png"></p>
+<p><img src="/img/2017-2-4-Struts2入门/Struts2结构图.png" alt="Struts2结构图" title="Struts2结构图.png"></p>
 ]]></content>
     </entry>
     

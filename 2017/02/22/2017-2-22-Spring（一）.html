@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="潜水的沙" />
+
+
+
+<meta name="description" content="点击查看内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017-2-22-Spring（一）">
+<meta property="og:url" content="http://www.lshao.me/2017/02/22/2017-2-22-Spring（一）.html">
+<meta property="og:site_name" content="潜水的沙">
+<meta property="og:description" content="点击查看内容">
+<meta property="og:updated_time" content="2017-03-02T04:15:09.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017-2-22-Spring（一）">
+<meta name="twitter:description" content="点击查看内容">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="潜水的沙" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>2017-2-22-Spring（一） | 潜水的沙</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">潜水的沙</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android，自定义View/">Android，自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaEE/">JavaEE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Js/">Js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jsp/">Jsp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Struts2/">Struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/">WebView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mvc/">mvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">潜水的沙</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">潜水的沙</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">细心学习，不惧繁琐，多总结，多研究</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:254174981@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="http://github.com/ahmclishihao" title="GitHub"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/ahmclishihao" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-2017-2-22-Spring（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/22/2017-2-22-Spring（一）.html" class="article-date">
+      <time datetime="2017-02-22T12:25:52.000Z" itemprop="datePublished">2017-02-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2017-2-22-Spring（一）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java-EE/">Java EE</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>点击查看内容</p>
+<a id="more"></a>
+<h2 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h2><p>Spring核心内容：bean、core、context、expression language</p>
+<h2 id="BeanFactory和ApplicationContext的区别"><a href="#BeanFactory和ApplicationContext的区别" class="headerlink" title="BeanFactory和ApplicationContext的区别"></a>BeanFactory和ApplicationContext的区别</h2><p>1、加载问题<br>beanFactory会具备懒加载，只有在getBean的时候才会加载bean<br>applicationContext<strong><em>会立即加载配置文件中的所有bean</em></strong><br>2、applicationContext更强大<br>applicationContext可以进行国际化处理、事件传递、Bean自动装配、各种不同应用层的Context实现</p>
+<h2 id="Bean文件详解"><a href="#Bean文件详解" class="headerlink" title="Bean文件详解"></a>Bean文件详解</h2><h3 id="Bean的生成方式"><a href="#Bean的生成方式" class="headerlink" title="Bean的生成方式"></a>Bean的生成方式</h3><p>1、默认构造<br>即普通的bean声明方式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 默认构造 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.UserServiceImpl"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2、静态工厂构造<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 静态工厂 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.StaticFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getUserService"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3、实例工厂构造<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 实例工厂 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myFactory"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.b_instance.InstanceFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService02"</span> <span class="attr">factory-bean</span>=<span class="string">"myFactory"</span> <span class="attr">factory-method</span>=<span class="string">"getUserService"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h3><p>spring提供的工厂包装bean，实现factoryBean接口后，spring将加载首先加载该接口。</p>
+<p>起到懒加载的作用。</p>
+<p><strong><em>但是用这种方式后需要手动进行依赖注入。</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">&lt;!-- FactoryBean 一个实现了工厂的bean每次实例时，都是通过工厂创建，而不是直接的实例</span></div><div class="line">   	spring内部调用其getObject方法获取实例</div><div class="line">    --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.c_factorybean.MyFactoryBean"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">		String xmlPath = <span class="string">"com/lsh/spring/c_factorybean/applicationContext.xml"</span>;</div><div class="line">		<span class="comment">// bean不会被立即加载UserService而是调用getBean时才会加载</span></div><div class="line">		ApplicationContext applicationContext = <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">				xmlPath);</div><div class="line">		IUserService userService = (IUserService) applicationContext</div><div class="line">				.getBean(<span class="string">"userService"</span>);</div><div class="line">		userService.serviceMethod();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="scope-作用域"><a href="#scope-作用域" class="headerlink" title="scope 作用域"></a>scope 作用域</h3><p>指定生成的bean是否为单例或者多例，默认为单例<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">scope</span>=<span class="string">""</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>singleton : 单例<br>prototype : 多例</p>
+<p>对于FactoryBean生产的bean需要在scope和isSingleton同时为单例的情况下才能生成单例的实例。</p>
+<h3 id="lifecycle-生命周期"><a href="#lifecycle-生命周期" class="headerlink" title="lifecycle 生命周期"></a>lifecycle 生命周期</h3><p>xml 中 指定对应 init和destory方法，spring自动调用<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"userService"</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.d_lifecycle.UserServiceImpl"</span> <span class="attr">init-method</span>=<span class="string">"init"</span> <span class="attr">destroy-method</span>=<span class="string">"destroy"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="BeanPostProcessor-回调"><a href="#BeanPostProcessor-回调" class="headerlink" title="BeanPostProcessor 回调"></a>BeanPostProcessor 回调</h3><p>BeanPostProcessor会在对象的init方法前后分别执行，开发者可以在此时对对象进行加工或者替换，但是<strong><em>对象销毁时仍然使用源对象的destroy方法</em></strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 声明一个BeanPostProcessor，提供给Spring回调 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.lsh.spring.d_lifecycle.MyBeanPostProcessor"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">postProcessBeforeInitialization</span><span class="params">(Object bean, String beanName)</span></span></div><div class="line">		<span class="keyword">throws</span> BeansException &#123;</div><div class="line">	System.out.println(<span class="string">"MyBeanPostProcessor postProcessBefore "</span>);</div><div class="line">	<span class="keyword">return</span> bean;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">postProcessAfterInitialization</span><span class="params">(<span class="keyword">final</span> Object bean,</span></span></div><div class="line">		String beanName)</div><div class="line">		<span class="keyword">throws</span> BeansException &#123;</div><div class="line">	System.out.println(<span class="string">"MyBeanPostProcessor postProcessAfter "</span>);</div><div class="line">	<span class="keyword">return</span> Proxy.newProxyInstance(</div><div class="line">			MyBeanPostProcessor.class.getClassLoader(),</div><div class="line">			UserServiceImpl.class.getInterfaces(), <span class="keyword">new</span> InvocationHandler() &#123;</div><div class="line">				<span class="meta">@Override</span></div><div class="line">				<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method,</span></span></div><div class="line">						Object[] args) <span class="keyword">throws</span> Throwable &#123;</div><div class="line">					String name = method.getName();</div><div class="line">					System.out.println(<span class="string">"开始调用"</span> + name + <span class="string">" 已经记录和处理"</span>);</div><div class="line">					Object methodResult = method.invoke(bean, args);</div><div class="line">					System.out.println(<span class="string">"结束调用"</span> + name + <span class="string">"已经记录和处理"</span>);</div><div class="line">					<span class="keyword">return</span> methodResult;</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl construct</div><div class="line">MyBeanPostProcessor postProcessBefore  ------------------------ &gt;&gt;&gt; postProcessor开始执行</div><div class="line">CopyOfMyBeanPostProcessor postProcessBefore </div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl init</div><div class="line">MyBeanPostProcessor postProcessAfter </div><div class="line"></div><div class="line">CopyOfMyBeanPostProcessor postProcessAfter </div><div class="line">Copy 开始调用serviceMethod 已经记录和处理 ------------------------&gt;&gt;&gt;已经转为代理类</div><div class="line">开始调用serviceMethod 已经记录和处理</div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl serviceMethod ------------------&gt;&gt;&gt;代理类中调用了源实例的方法</div><div class="line">结束调用serviceMethod已经记录和处理</div><div class="line">Copy 结束调用serviceMethod已经记录和处理</div><div class="line">com.lsh.spring.d_lifecycle.UserServiceImpl destroy ---------------&gt;&gt;&gt;调用了destroy</div></pre></td></tr></table></figure>
+<h3 id="P命令空间"><a href="#P命令空间" class="headerlink" title="P命令空间"></a>P命令空间</h3><p>可以简化get/set方法，在参数注入时不用再去书写<property>&lt;/~&gt;类似的二级节点，类似android的配置文件。<br>使用时写上命名空间，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">	   <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	   <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></div><div class="line">	   <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></div><div class="line">						   http://www.springframework.org/schema/beans/spring-beans.xsd"&gt;</div><div class="line"> <span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></property></p>
+<h3 id="SpEL"><a href="#SpEL" class="headerlink" title="SpEL"></a>SpEL</h3><p>对<code>&lt;property&gt;</code>进行统一编程，所有的内容都使用value<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"#&#123;表达式&#125;"</span>&gt;</span></div><div class="line">#&#123;123&#125;、#&#123;'jack'&#125; ： 数字、字符串</div><div class="line">#&#123;beanId&#125;	：另一个bean引用</div><div class="line">#&#123;beanId.propName&#125;	：操作数据</div><div class="line">#&#123;beanId.toString()&#125;	：执行方法</div><div class="line">#&#123;T(类).字段|方法&#125;	：静态方法或字段</div></pre></td></tr></table></figure></p>
+<h2 id="spring常用注解"><a href="#spring常用注解" class="headerlink" title="spring常用注解"></a>spring常用注解</h2><p>使用注解时需要添加命名空间，并配置要扫描的包，如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">	   <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">	   <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">	   <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans </span></div><div class="line">						   http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">						   http://www.springframework.org/schema/context </div><div class="line">						   http://www.springframework.org/schema/context/spring-context.xsd"&gt;</div><div class="line">	<span class="comment">&lt;!-- 开启扫描 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.lsh.spring.e_di"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>常用替代bean配置的注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@component</span> <span class="comment">// 指定一个bean，以下三个为component的衍生注解</span></div><div class="line"><span class="meta">@Controller</span> <span class="comment">// 指明是一个control层</span></div><div class="line"><span class="meta">@Service</span> <span class="comment">// 指明是一个Service层</span></div><div class="line"><span class="meta">@Repository</span> <span class="comment">// 指明是一个dao层</span></div><div class="line"></div><div class="line"><span class="meta">@Value</span> <span class="comment">// 注入参数</span></div><div class="line"><span class="meta">@Autowired</span> <span class="comment">// 自动装配，可写在变量名上，也可写在set方法上</span></div><div class="line"></div><div class="line"><span class="meta">@Scope</span>(ConfigurableBeanFactory.SCOPE_PROTOTYPE) <span class="comment">// 指明参数的作用域 单例(singleton)或者多例(prototype)</span></div></pre></td></tr></table></figure></p>
+<p>即使，使用了注解setter方法也是不可避免的，需要添加setter方法才可以注入。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/22/2017-2-22-Spring（一）.html">2017-2-22-Spring（一）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
+        <p><span>发布时间:</span>2017-02-22, 20:25:52</p>
+        <p><span>最后更新:</span>2017-03-02, 12:15:09</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/22/2017-2-22-Spring（一）.html" title="2017-2-22-Spring（一）">http://www.lshao.me/2017/02/22/2017-2-22-Spring（一）.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/02/22/2017-2-22-Spring（一）.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/13/2017-2-13-Hibernate.html">
+                    2017-2-13-Hibernate
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring简介"><span class="toc-number">1.</span> <span class="toc-text">Spring简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory和ApplicationContext的区别"><span class="toc-number">2.</span> <span class="toc-text">BeanFactory和ApplicationContext的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean文件详解"><span class="toc-number">3.</span> <span class="toc-text">Bean文件详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean的生成方式"><span class="toc-number">3.1.</span> <span class="toc-text">Bean的生成方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FactoryBean"><span class="toc-number">3.2.</span> <span class="toc-text">FactoryBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scope-作用域"><span class="toc-number">3.3.</span> <span class="toc-text">scope 作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lifecycle-生命周期"><span class="toc-number">3.4.</span> <span class="toc-text">lifecycle 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanPostProcessor-回调"><span class="toc-number">3.5.</span> <span class="toc-text">BeanPostProcessor 回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P命令空间"><span class="toc-number">3.6.</span> <span class="toc-text">P命令空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpEL"><span class="toc-number">3.7.</span> <span class="toc-text">SpEL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#spring常用注解"><span class="toc-number">4.</span> <span class="toc-text">spring常用注解</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/13/2017-2-13-Hibernate.html" title="下一篇: 2017-2-13-Hibernate">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/22/2017-2-22-Spring（一）.html">2017-2-22-Spring（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/2017-2-13-Hibernate.html">2017-2-13-Hibernate</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/04/2017-2-4-Struts2入门.html">2017-2-4-Struts2入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/31/2017-1-31-Listener与Filter.html">2017-1-31-Listener与Filter</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/20/2017-1-20-事务连接池.html">2017-1-20-事务连接池</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/18/2017-1-18-ee中的小知识.html">2017-1-18-ee中的小知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/17/2017-1-17-Jsp的使用.html">2017-1-17-Jsp的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/09/2017-1-9-Path的基本使用.html">2017-1-9-Path的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/01/2017-1-1-自定义View高级知识点(二).html">2017-1-1-自定义View高级知识点(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/2016-12-30-自定义View高级知识点(一).html">2016-12-30-自定义View高级知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/2016-12-24-MD控件的使用.html">MD控件的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/2016-11-13-SurfaceView的使用.html">SurfaceView的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/07/2016-11-07-Android调H5.html">Android调H5</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/2016-10-28-python入门.html">python 入门基本点</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 潜水的沙
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" >Yelee</a> by MOxFIVE 
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
