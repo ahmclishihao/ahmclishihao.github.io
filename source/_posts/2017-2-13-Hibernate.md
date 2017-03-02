@@ -6,7 +6,7 @@ tags: [Hibernate]
 layout: post
 ---
 
-摘要部分
+点击查看内容
 
 <!-- more -->
 
@@ -83,11 +83,11 @@ get/load方法。。
 
 | 语句 | sql结果 |图形表示|
 |---|---|---|
-|`SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name`|| ![inner_join][1]|
-|`SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name`|| ![full_outer_join][2]|
-|`SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name`|| ![left_outer_join][3]|
-|`	SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null`|| ![left_outer_isnull][4]|
-|`	SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null`||![full_join_isnull][5]|
+|SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name|| ![inner_join][1]|
+|SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name|| ![full_outer_join][2]|
+|SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name|| ![left_outer_join][3]|
+|SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null|| ![left_outer_isnull][4]|
+|SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null||![full_join_isnull][5]|
 
 
 ## HQL详解
@@ -119,7 +119,7 @@ get/load方法。。
 	写锁：select * from t_xxxx for update; (该锁会造成阻塞)
 
 乐观锁：
-
+	使用乐观锁时，每个table中都要添加version字段，用于hibernate每次commit校验。只有version值小于事物开启前的值方可进行提交。
 
 ## 一对一多表设计
 
