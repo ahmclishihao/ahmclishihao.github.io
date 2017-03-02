@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://www.lshao.me/img/2017-2-13-Hibernate/left_outer_isnull.png">
 <meta property="og:image" content="http://www.lshao.me/img/2017-2-13-Hibernate/full_join_isnull.png">
 <meta property="og:image" content="http://www.lshao.me/img/2017-2-13-Hibernate/hibernate中属性的对应参数.png">
-<meta property="og:updated_time" content="2017-03-02T04:26:15.904Z">
+<meta property="og:updated_time" content="2017-03-02T04:35:08.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2017-2-13-Hibernate">
 <meta name="twitter:description" content="点击查看内容">
@@ -357,27 +357,27 @@
 </thead>
 <tbody>
 <tr>
-<td><code>SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td>SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name</td>
 <td></td>
 <td><img src="/img/2017-2-13-Hibernate/inner_join.png" alt="inner_join" title="inner_join.png"></td>
 </tr>
 <tr>
-<td><code>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name</td>
 <td></td>
 <td><img src="/img/2017-2-13-Hibernate/full_outer_join.png" alt="full_outer_join" title="full_outer_join.png"></td>
 </tr>
 <tr>
-<td><code>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name</code></td>
+<td>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name</td>
 <td></td>
 <td><img src="/img/2017-2-13-Hibernate/left_outer_join.png" alt="left_outer_join" title="left_outer_join.png"></td>
 </tr>
 <tr>
-<td><code>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null</code></td>
+<td>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null</td>
 <td></td>
 <td><img src="/img/2017-2-13-Hibernate/left_outer_isnull.png" alt="left_outer_isnull" title="left_outer_isnull.png"></td>
 </tr>
 <tr>
-<td><code>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null</code></td>
+<td>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null</td>
 <td></td>
 <td><img src="/img/2017-2-13-Hibernate/full_join_isnull.png" alt="full_join_isnull" title="full_join_isnull.png"></td>
 </tr>
@@ -394,7 +394,7 @@
 <p>#hibernate.c3p0.validate false</p>
 <h2 id="数据库的锁"><a href="#数据库的锁" class="headerlink" title="数据库的锁"></a>数据库的锁</h2><p>解决并发问题</p>
 <p>悲观锁：<br>    读锁：select <em> from t_xxxx lock in share mode; (该锁可被所有人使用)<br>    写锁：select </em> from t_xxxx for update; (该锁会造成阻塞)</p>
-<p>乐观锁：</p>
+<p>乐观锁：<br>    使用乐观锁时，每个table中都要添加version字段，用于hibernate每次commit校验。只有version值小于事物开启前的值方可进行提交。</p>
 <h2 id="一对一多表设计"><a href="#一对一多表设计" class="headerlink" title="一对一多表设计"></a>一对一多表设计</h2><h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>二级缓存是进程级别的缓存。</p>
 <p>1.一级缓存的主要优化手段是快照。</p>
 <p>添加缓存的方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 启用二级缓存 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.use_second_level_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 缓存的提供类 ehcache --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.provider_class"</span>&gt;</span>org.hibernate.cache.EhCacheProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 哪个类需要缓存 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.lsh.hibernate.domain.Student"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
@@ -418,7 +418,7 @@
         <p><span>本文标题:</span><a href="/2017/02/13/2017-2-13-Hibernate.html">2017-2-13-Hibernate</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">潜水的沙</a></p>
         <p><span>发布时间:</span>2017-02-13, 19:59:03</p>
-        <p><span>最后更新:</span>2017-03-02, 12:26:15</p>
+        <p><span>最后更新:</span>2017-03-02, 12:35:08</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/02/13/2017-2-13-Hibernate.html" title="2017-2-13-Hibernate">http://www.lshao.me/2017/02/13/2017-2-13-Hibernate.html</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.lshao.me/2017/02/13/2017-2-13-Hibernate.html　　作者: 潜水的沙" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
