@@ -5,9 +5,6 @@ categories: Java EE
 tags: [Hibernate]
 layout: post
 ---
-
-点击查看内容
-
 <!-- more -->
 
 
