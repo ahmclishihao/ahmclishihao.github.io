@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2017-1-9-Path的基本使用 · 潜水的沙 -- Java 开发者</title><meta name="description" content="2017-1-9-Path的基本使用 - 潜水的沙"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://lshao.xyz/atom.xml" title="潜水的沙 -- Java 开发者"></head><body><div class="wrap"><header><ul class="nav nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link"> 潜水的沙</a></li><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/ahmclishihao" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="http://blog.csdn.net/ahmclishihao" target="_blank" class="nav-list-link">CSDN</a></li><li class="nav-list-item"><a href="/about/index.html" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">2017-1-9-Path的基本使用</h1><div class="post-info">2017年1月9日</div><div class="post-content"><p>Path是自定义View中不可或缺的东西，熟练使用Path可以画出不一般的效果。</p>
+<a id="more"></a>
+<h2 id="path的基本方法"><a href="#path的基本方法" class="headerlink" title="path的基本方法"></a>path的基本方法</h2><p>path.lineTo(x,y); // 从上一个点 移动到某点 ，如果没有上一个点就是从当前的canvas坐标系开始</p>
+<p>path.moveTo(x,y); // 将下一点移动到某点，移动后下一次的起点将是该点，同时该点不会影响上一次的绘画</p>
+<p>path.setLastPoint(x,y); // 设置最后一次操作的点，同样可以改变下一次的起点，但同时会影响上一次的操作</p>
+<p>path.close(); // 闭合path， path会找一条最短路径去闭合当前的曲线 move后的点是不会和之前的点进行闭合的</p>
+<p><img src="/img/2017-1-9-Path的基本使用/move&amp;close.png" alt="move和close同时使用" title="move&amp;close.png"></p>
+<h2 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h2><p>path.quadTo() // 二阶贝塞尔<br>path.cubicTo() // 三阶贝塞尔</p>
+<h2 id="Region判断点击"><a href="#Region判断点击" class="headerlink" title="Region判断点击"></a>Region判断点击</h2><p>Region 中包含一个矩形范围可以用来判断是否包含某点<br>region.contains(point);</p>
+<h2 id="view-pager-indicator的动画"><a href="#view-pager-indicator的动画" class="headerlink" title="view pager indicator的动画"></a>view pager indicator的动画</h2><p>通过将动画存储在集合中，在不同的pager position下创建对应的动画，让viewpager中offset与动画时间形成比例<br><code>animator.setCurrentPlayTime((long) (5000.0F * offset));</code></p>
+<h2 id="Android中的填充模式"><a href="#Android中的填充模式" class="headerlink" title="Android中的填充模式"></a>Android中的填充模式</h2><p>Android中的填充模式有四种，是封装在Path中的一个枚举。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EVEN_ODD</td>
+<td>奇偶规则</td>
+</tr>
+<tr>
+<td>INVERSE_EVEN_ODD</td>
+<td>反奇偶规则</td>
+</tr>
+<tr>
+<td>WINDING</td>
+<td>非零环绕数规则</td>
+</tr>
+<tr>
+<td>INVERSE_WINDING</td>
+<td>反非零环绕数规则</td>
+</tr>
+</tbody>
+</table>
+<p>paint的填充规则为FILL时 path默认的是winding规则。填充时会有一个范围。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/01/17/2017-1-17-Jsp的使用/" class="prev">PREV</a><a href="/2017/01/01/2017-1-1-自定义View高级知识点(二)/" class="next">NEXT</a></div><div class="copyright"><p>© 2016 - 2018 <a href="http://lshao.xyz">潜水的沙</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

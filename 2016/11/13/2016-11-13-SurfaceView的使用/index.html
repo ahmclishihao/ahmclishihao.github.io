@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> SurfaceView的使用 · 潜水的沙 -- Java 开发者</title><meta name="description" content="SurfaceView的使用 - 潜水的沙"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://lshao.xyz/atom.xml" title="潜水的沙 -- Java 开发者"></head><body><div class="wrap"><header><ul class="nav nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link"> 潜水的沙</a></li><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/ahmclishihao" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="http://blog.csdn.net/ahmclishihao" target="_blank" class="nav-list-link">CSDN</a></li><li class="nav-list-item"><a href="/about/index.html" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">SurfaceView的使用</h1><div class="post-info">2016年11月13日</div><div class="post-content"><p>SurfaceView的基本逻辑<br><a id="more"></a></p>
+<h2 id="SurfaceView"><a href="#SurfaceView" class="headerlink" title="SurfaceView"></a>SurfaceView</h2><p>主要的类：</p>
+<blockquote>
+<p>SurfaceView 展示内容的地方</p>
+<p>↓    getHolder()</p>
+<p>SurfaceHolder 展示的内容</p>
+<p>↓    addCallback() → getSurface() 获取 surface</p>
+<p>SurfaceHolder.Callback</p>
+<p>↓    线程需要在surfaceCreate时创建，surfaceDestroy停止</p>
+<p>Thread 持续展示内容的工人</p>
+</blockquote>
+<h2 id="Surface"><a href="#Surface" class="headerlink" title="Surface"></a>Surface</h2><blockquote>
+<p>lockCanvas 锁定画布 保证线程安全</p>
+<p>↓ 开启线程</p>
+<p>绘制界面 </p>
+<p>unlockCanvasAndPost 解锁画布</p>
+<p>↓ 关闭线程</p>
+</blockquote>
+<h2 id="绘制背景"><a href="#绘制背景" class="headerlink" title="绘制背景"></a>绘制背景</h2><p><code>每次一个对象重新绘制位置的时候都会造成叠加的效果</code>，<br>如何解决：是通过不断重新绘制背景来覆盖原来的图片</p>
+<h2 id="Rect-矩形类"><a href="#Rect-矩形类" class="headerlink" title="Rect 矩形类"></a>Rect 矩形类</h2><p>android提供的范围类，可以检测是否包含某点</p>
+<h2 id="Cocos2dx"><a href="#Cocos2dx" class="headerlink" title="Cocos2dx"></a>Cocos2dx</h2><p>CCGLSurfaceView surfaceview类</p>
+<p>CCDirector 导演类 （单例的）CCDirector.sharedDirector</p>
+<p>CCScene 场景类 CCScene.node() 展示节点的根节点</p>
+<p>CCLayer 图层类 CCSense.addChild() 添加图层</p>
+<p>CCSprite 精灵类</p>
+<p>默认图片放在asset中</p>
+<p>坐标都是左下角开始的正常坐标系，Sprite的默认锚点在中间点<br>默认从锚点绘制</p>
+<p>director可以和activity生命周期绑定，手动绑定(在各个周期内绑定)</p>
+<h2 id="layer处理触摸事件"><a href="#layer处理触摸事件" class="headerlink" title="layer处理触摸事件"></a>layer处理触摸事件</h2><blockquote>
+<p>都是在子线程中进行的，不能进行UI操作，当然surfaceView可以</p>
+</blockquote>
+<p>layer事件中开启<br>setIsTouchEnabled(true);触摸事件开关</p>
+<p>ccTOuchedBegan(event);按下事件</p>
+<p>andorid坐标系的点转换为cocos中的点converTouchToNodeSpace</p>
+<h2 id="CCNode"><a href="#CCNode" class="headerlink" title="CCNode"></a>CCNode</h2><p>获取单元的范围:CGRect rect = ccNode.getBoundingBox();</p>
+<p>获取单元的大小：CGSize size = ccNode.getBoundingBox().size;</p>
+<p>将Android的MotionEvent转换成 Cocos2d上的点<br>CGPoint cgPoint = convertTouchToNodeSpace(event);</p>
+<h2 id="CCAction"><a href="#CCAction" class="headerlink" title="CCAction"></a>CCAction</h2><p>动作</p>
+<p>CCSequence <code>串行动作</code> CCSequence.action(xx,xx);<br>CCSpawn <code>并行动作</code> </p>
+<p>CCRepeatForever 重复的动作，用于包装Action</p>
+<p>CCEaseIn 具备加速的动作，用于包装Action</p>
+<p>CCLabel 专门显示文字的sprite</p>
+<p>ccColor3B 颜色渐变的action cc3(r,g,b);</p>
+<p>xxxBy 事件都重写了reserver 而 xxxTo都没有重写reserver会报异常。例如：CCTintTo CCRotateTo CCJumpTo</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/12/24/2016-12-24-MD控件的使用/" class="prev">PREV</a><a href="/2016/11/07/2016-11-07-Android调H5/" class="next">NEXT</a></div><div class="copyright"><p>© 2016 - 2018 <a href="http://lshao.xyz">潜水的沙</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

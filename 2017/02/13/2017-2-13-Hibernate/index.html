@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="zh_CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2017-2-13-Hibernate · 潜水的沙 -- Java 开发者</title><meta name="description" content="2017-2-13-Hibernate - 潜水的沙"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://lshao.xyz/atom.xml" title="潜水的沙 -- Java 开发者"></head><body><div class="wrap"><header><ul class="nav nav-list"><li class="nav-list-item"><a href="/" class="nav-list-link"> 潜水的沙</a></li><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/ahmclishihao" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="http://blog.csdn.net/ahmclishihao" target="_blank" class="nav-list-link">CSDN</a></li><li class="nav-list-item"><a href="/about/index.html" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">2017-2-13-Hibernate</h1><div class="post-info">2017年2月13日</div><div class="post-content"><a id="more"></a>
+<h2 id="Hibernate中的小知识"><a href="#Hibernate中的小知识" class="headerlink" title="Hibernate中的小知识"></a>Hibernate中的小知识</h2><p>1、每一个线程的Session在事务提交的时候，会自动关闭并从当前线程删除。</p>
+<p>2、HQL 每次都重新去查询（发送sql），而不是从一级缓存中获取</p>
+<p>3、HQL 会将结果放入一级缓存中</p>
+<p>4、persist和save方法的区别</p>
+<pre><code>- persist将会完整的持久化bean对象，所以对应的主键不能自己配置（除非主键自增策略为assigned）
+- save方法中，每次都重新设置id
+</code></pre><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><p>外键：如果公共关键字在一个关系中是主关键字，那么这个公共关键字被称为另一个关系的外键。由此可见，外键表示了两个关系之间的相关联系。以另一个关系的外键作主关键字的表被称为主表，具有此外键的表被称为主表的从表。外键又称作外关键字。</p>
+<h3 id="控制权限-inverse"><a href="#控制权限-inverse" class="headerlink" title="控制权限 inverse"></a>控制权限 inverse</h3><p>inverse表示 外键的维护权限是否反转。</p>
+<h3 id="级联操作-cascade"><a href="#级联操作-cascade" class="headerlink" title="级联操作 cascade"></a>级联操作 cascade</h3><h2 id="加载策略"><a href="#加载策略" class="headerlink" title="加载策略"></a>加载策略</h2><h3 id="类加载策略"><a href="#类加载策略" class="headerlink" title="类加载策略"></a>类加载策略</h3><p>get/load方法。。</p>
+<p>默认：load方法是在对象的属性被调用的时候才发送语句查询，被称为懒加载(lazy)。<br>其配置属性为:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 懒加载默认是开启的 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"Student"</span> <span class="attr">table</span>=<span class="string">"t_student"</span> <span class="attr">lazy</span>=<span class="string">"true"</span> &gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="关联级别懒加载"><a href="#关联级别懒加载" class="headerlink" title="关联级别懒加载"></a>关联级别懒加载</h3><p>默认：所关联的数据，在使用时才开始加载其数据。</p>
+<p>关联级别的加载受两个属性控制：</p>
+<pre><code>&lt;set&gt;
+    lazy：是否使用懒加载
+    fetch：加载集合使用的sql语句种类
+        select ： 普通的select查询
+        join：表链接语句
+        subselect：子查询加载
+</code></pre><h3 id="join语句的规则"><a href="#join语句的规则" class="headerlink" title="join语句的规则"></a>join语句的规则</h3><p>其各有四条记录，其中有两条记录是相同的，如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tom</td>
+<td>1</td>
+<td>Rutabaga</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jack</td>
+<td>2</td>
+<td>Jerry</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rose</td>
+<td>3</td>
+<td>Tom</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Jerry</td>
+<td>4</td>
+<td>Ninja</td>
+</tr>
+</tbody>
+</table>
+<p>那么对应的join语句有如下五种情况：</p>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>sql结果</th>
+<th>图形表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT * FROM TableA INNER JOIN TableB ON TableA.name = TableB.name</td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/inner_join.png" alt="inner_join" title="inner_join.png"></td>
+</tr>
+<tr>
+<td>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.name</td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/full_outer_join.png" alt="full_outer_join" title="full_outer_join.png"></td>
+</tr>
+<tr>
+<td>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.name</td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/left_outer_join.png" alt="left_outer_join" title="left_outer_join.png"></td>
+</tr>
+<tr>
+<td>SELECT * FROM TableA LEFT OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableB.id IS null</td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/left_outer_isnull.png" alt="left_outer_isnull" title="left_outer_isnull.png"></td>
+</tr>
+<tr>
+<td>SELECT * FROM TableA FULL OUTER JOIN TableB ON TableA.name = TableB.nameWHERE TableA.id IS null ORTableB.id IS null</td>
+<td></td>
+<td><img src="/img/2017-2-13-Hibernate/full_join_isnull.png" alt="full_join_isnull" title="full_join_isnull.png"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="HQL详解"><a href="#HQL详解" class="headerlink" title="HQL详解"></a>HQL详解</h2><h2 id="使用C3P0的连接池"><a href="#使用C3P0的连接池" class="headerlink" title="使用C3P0的连接池"></a>使用C3P0的连接池</h2><p>先导入c3p0的jar包，再更改hibernate.cfg中的：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.provider_class"</span>&gt;</span>org.hibernate.connection.C3P0ConnectionProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>同时还可以配置更多的C3P0的属性，如下：</p>
+<p>#hibernate.c3p0.max_size 2</p>
+<p>#hibernate.c3p0.min_size 2</p>
+<p>#hibernate.c3p0.timeout 5000</p>
+<p>#hibernate.c3p0.max_statements 100</p>
+<p>#hibernate.c3p0.idle_test_period 3000</p>
+<p>#hibernate.c3p0.acquire_increment 2</p>
+<p>#hibernate.c3p0.validate false</p>
+<h2 id="数据库的锁"><a href="#数据库的锁" class="headerlink" title="数据库的锁"></a>数据库的锁</h2><p>解决并发问题</p>
+<p>悲观锁：<br>    读锁：select <em> from t_xxxx lock in share mode; (该锁可被所有人使用)<br>    写锁：select </em> from t_xxxx for update; (该锁会造成阻塞)</p>
+<p>乐观锁：<br>    使用乐观锁时，每个table中都要添加version字段，用于hibernate每次commit校验。只有version值小于事物开启前的值方可进行提交。</p>
+<h2 id="一对一多表设计"><a href="#一对一多表设计" class="headerlink" title="一对一多表设计"></a>一对一多表设计</h2><h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>二级缓存是进程级别的缓存。</p>
+<p>1.一级缓存的主要优化手段是快照。</p>
+<p>添加缓存的方式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启用二级缓存 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.use_second_level_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 缓存的提供类 ehcache --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.provider_class"</span>&gt;</span>org.hibernate.cache.EhCacheProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 哪个类需要缓存 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.lsh.hibernate.domain.Student"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="类缓存区"><a href="#类缓存区" class="headerlink" title="类缓存区"></a>类缓存区</h3><p>类缓存的方式：<br>类缓存并非将数据一对象的形式缓存，而是缓存成散列数据，在一级缓存中组装成对象。</p>
+<h3 id="集合缓存区"><a href="#集合缓存区" class="headerlink" title="集合缓存区"></a>集合缓存区</h3><p>集合缓存的方式：<br>集合缓存会将集合中每个对象的id存放起来，在使用时去类缓存中查询，集合缓存，也必须声明缓存集合中的元素。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.lsh.hibernate.domain.Course"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">collection-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">collection</span>=<span class="string">"com.lsh.hibernate.domain.Student.courses"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="查询缓存区"><a href="#查询缓存区" class="headerlink" title="查询缓存区"></a>查询缓存区</h3><p>对HQL语句进行缓存，通过<code>setCachable(true)</code>开启查询缓存。<br>查询缓存会将查询到的结果的id存储起来，再此查询的时候通过id到类缓存中查找。</p>
+<p>查询缓存内部是将HQL语句所对应的SQL语句与要缓存的id一同存储起来，<br>所以“select c from Customer c”与”from Customer”会得到相同的结果。</p>
+<h2 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h2><p>1、Hibernate中配置集合不一定只使用set，使用bag可以通过order-by参数添加排序方式</p>
+<bag name="replies" cascade="save-update" order-by="id asc"><br>            <key column="tid"></key><br>            <one-to-many class="Reply"><br></one-to-many></bag>
+
+<p>2、Hibernate配置bean中的类型与sql中的类型<br><img src="/img/2017-2-13-Hibernate/hibernate中属性的对应参数.png" alt="类型对应" title="hibernate中属性的对应参数.png"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/02/22/2017-2-22-Spring（一）/" class="prev">PREV</a><a href="/2017/02/04/2017-2-4-Struts2入门/" class="next">NEXT</a></div><div class="copyright"><p>© 2016 - 2018 <a href="http://lshao.xyz">潜水的沙</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
