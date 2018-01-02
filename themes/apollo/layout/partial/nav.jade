@@ -1,0 +1,12 @@
+ul.nav.nav-list
+    if config.blogName
+        li.nav-list-item
+            a.nav-list-link(class={active: false} href=url_for("/") target="_self")
+                != config.blogName
+    each value, key in theme.menu
+        li.nav-list-item
+            - var re = /^(http|https):\/\/*/gi;
+            - var tar = re.test(value) ? "_blank" : "_self"
+            - var act = !re.test(value) && "/"+page.current_url === value
+            a.nav-list-link(class={active: act} href=url_for(value) target=tar)
+                != key.toUpperCase()
