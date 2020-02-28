@@ -1,5 +1,7 @@
-﻿<html>
-    <head>        
+﻿<!DOCTYPE html>
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 		<style type="text/css">
@@ -8,7 +10,6 @@
 			}
 			table {
 				width: 1000px;
-				cellpadding: 0px !important;
 			}
 			table:after {
 				content: '.';
@@ -22,6 +23,9 @@
 			tr {
 				float: left;
 				margin-left: 20px;
+			}
+			tr:hover {
+				color: blue;
 			}
 
 			td:nth-child(1){
@@ -45,7 +49,7 @@
 				display: none;
 				position: fixed;
 				top: 50%;
-				left: calc(50% - 150px);
+				left: 45%;
 				border-radius: 20px;
 				background: #999;
 				color: #fff;
@@ -53,6 +57,28 @@
 				width: 300px;
 				padding: 20px;
 			}
+			
+			@media screen and (max-device-width: 1000px) {
+				tr {
+					float: none;
+				}
+				table {
+					width: 500px;
+				}
+				.dialog {
+					display: none;
+					position: fixed;
+					top: calc(50% - 20px);
+					left: calc(45% - 150px);
+					border-radius: 20px;
+					background: #999;
+					color: #fff;
+					text-align: center;
+					width: 300px;
+					padding: 20px;
+				}
+			}
+			
 			@media   print{<!--控制哪些打印，哪些不打印的样式-->         
 				.print   {display:block;}   
 				.notPrint {display:none;}   
@@ -6831,7 +6857,7 @@
 		</div>
     </body>
 	<script type="text/javascript">
-	// 生成两个按钮
+	// 生成四个按钮
 	var showBtn = document.createElement('button');
 	showBtn.textContent = '显示注释';
 	showBtn.onclick = function (){
@@ -6899,9 +6925,9 @@
 		explainTrList.push(explain);
 		
 		// 单词点击后弹出注释
-		var word = lane.children[1];
 		var dialogId = new Date();
 		lane.onclick = function(){
+			this.style.color = 'red';
 			var dialog = document.getElementById("dialog");
 			dialog.textContent = this.children[3].textContent;
 			show(dialog, 'inline-block');
