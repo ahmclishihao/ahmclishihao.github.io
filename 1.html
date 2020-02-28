@@ -41,10 +41,25 @@
 				display: inline-block;
 				width: 200px;
 			}
+			.dialog {
+				display: none;
+				position: fixed;
+				top: 50%;
+				left: calc(50% - 150px);
+				border-radius: 20px;
+				background: #999;
+				color: #fff;
+				text-align: center;
+				width: 300px;
+				padding: 20px;
+			}
+			@media   print{<!--控制哪些打印，哪些不打印的样式-->         
+				.print   {display:block;}   
+				.notPrint {display:none;}   
+			}  
 		</style>
     </head>
     <body>
- 
         <table border="0" cellpadding="0px" class="export-table">
             <thead>
             <tr>
@@ -6810,10 +6825,55 @@
             </tbody>
         </table>
         
-        <div class="output-info">
+        <div class="output-info" >
+		<div class="dialog" id="dialog">
+			中问问
+		</div>
     </body>
 	<script type="text/javascript">
+	// 生成两个按钮
+	var showBtn = document.createElement('button');
+	showBtn.textContent = '显示注释';
+	showBtn.onclick = function (){
+		showExplainBtn(true);
+	}
+	showBtn.classList.add('notPrint');
+	document.body.insertBefore(showBtn, document.getElementsByTagName('table')[0]);
+	
+	var hideBtn = document.createElement('button');
+	hideBtn.textContent = '关闭注释';
+	hideBtn.onclick = function (){
+		showExplainBtn(false);
+	}
+	hideBtn.classList.add('notPrint');
+	document.body.insertBefore(hideBtn, document.getElementsByTagName('table')[0]);
+	
+	var zoomOutBtn = document.createElement('button');
+	zoomOutBtn.textContent = '放大+';
+	zoomOutBtn.onclick = function (){
+		zoom(2);
+	}
+	zoomOutBtn.classList.add('notPrint');
+	document.body.insertBefore(zoomOutBtn, document.getElementsByTagName('table')[0]);
+	
+	var zoomInBtn = document.createElement('button');
+	zoomInBtn.textContent = '缩小-';
+	zoomInBtn.onclick = function (){
+		zoom(-2);
+	}
+	zoomInBtn.classList.add('notPrint');
+	document.body.insertBefore(zoomInBtn, document.getElementsByTagName('table')[0]);
+	
+	function zoom(step){
+		document.querySelectorAll('*').forEach(element => {
+			let size = parseInt(element.style.fontSize?element.style.fontSize:12) + step;
+			element.style.fontSize = size +'px';
+		});
+	}
+	
+	// 转换单词列表的格式
 	var trList = document.getElementsByTagName('tr');
+	var explainTrList = [];
 	for(var i = 1; i < trList.length; i++){
 		var lane = trList[i];
 		lane.children[0].textContent = '□';
@@ -6836,11 +6896,37 @@
 			explain.textContent = expArr.join('');
 		}
 		explain.style.display = 'none';
+		explainTrList.push(explain);
 		
+		// 单词点击后弹出注释
 		var word = lane.children[1];
+		var dialogId = new Date();
 		lane.onclick = function(){
-			this.children[3].style= 'inline-block';
+			var dialog = document.getElementById("dialog");
+			dialog.textContent = this.children[3].textContent;
+			show(dialog, 'inline-block');
+			dialogId = new Date();
+			setTimeout(function(){
+				if(new Date() - dialogId >= 1500){
+					show(dialog, 'none');
+				}
+			}, 1500);
 		}
+	}
+	
+	// 显示所有注释
+	function showExplainBtn(visible){
+		for(let tr of explainTrList){
+			if (visible){
+				tr.style.display = 'inline-block';
+			}else{
+				tr.style.display = 'none';
+			}
+		}
+	}
+	
+	function show(element, display){
+		element.style.display = display;
 	}
 </script>
 </html>
