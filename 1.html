@@ -8,9 +8,6 @@
 			* {
 				font-size: 12px;
 			}
-			table {
-				width: 1000px;
-			}
 			table:after {
 				content: '.';
 				height: 0;
@@ -48,8 +45,8 @@
 			.dialog {
 				display: none;
 				position: fixed;
-				top: 50%;
-				left: 45%;
+				top: calc(50% - 20px);
+				left: calc(45% - 150px);
 				border-radius: 20px;
 				background: #999;
 				color: #fff;
@@ -59,28 +56,18 @@
 			}
 			
 			@media screen and (max-device-width: 1000px) {
-
 				table {
 					width: 500px;
 				}
 
-				.dialog {
-					display: none;
-					position: fixed;
-					top: calc(50% - 20px);
-					left: calc(45% - 150px);
-					border-radius: 20px;
-					background: #999;
-					color: #fff;
-					text-align: center;
-					width: 300px;
-					padding: 20px;
-				}
 			}
 			
 			@media   print{<!--控制哪些打印，哪些不打印的样式-->         
 				.print   {display:block;}   
 				.notPrint {display:none;}   
+				table {
+					width: 1000px;
+				}
 			}  
 		</style>
     </head>
