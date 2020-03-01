@@ -18,6 +18,7 @@
 			tr {
 				float: left;
 				margin-left: 20px;
+				color: green;
 			}
 			tr:hover {
 				color: blue;
@@ -51,6 +52,26 @@
 				text-align: center;
 				width: 300px;
 				padding: 20px;
+			}
+			
+			button,.primary-btn {
+				border: 1px;
+				background: #00a1ffe8;
+				border-radius: 5px;
+				color: white;
+				outline: none;
+				margin-left: 5px;
+				padding: 5px;
+			}
+			
+			.warnning-btn {
+			    border: 1px;
+				background: orange;
+				border-radius: 5px;
+				color: white;
+				outline: none;
+				margin-left: 5px;
+				padding: 5px;
 			}
 			
 			@media screen and (max-device-width: 1000px) {
@@ -36773,66 +36794,11 @@
 		</div>
     </body>
 		<script type="text/javascript">
-	// 生成按钮
-	var showBtn = document.createElement('button');
-	showBtn.textContent = '显示注释';
-	showBtn.onclick = function (){
-		showExplain(true);
-	}
-	showBtn.classList.add('notPrint');
-	document.body.insertBefore(showBtn, document.getElementsByTagName('table')[0]);
-	
-	var hideBtn = document.createElement('button');
-	hideBtn.textContent = '关闭注释';
-	hideBtn.onclick = function (){
-		showExplain(false);
-	}
-	hideBtn.classList.add('notPrint');
-	document.body.insertBefore(hideBtn, document.getElementsByTagName('table')[0]);
-	
-	var showSymbolBtn = document.createElement('button');
-	showSymbolBtn.textContent = '显示音标';
-	showSymbolBtn.onclick = function (){
-		showSymbol(true);
-	}
-	showSymbolBtn.classList.add('notPrint');
-	document.body.insertBefore(showSymbolBtn, document.getElementsByTagName('table')[0]);
-	
-	var hideSymbolBtn = document.createElement('button');
-	hideSymbolBtn.textContent = '关闭音标';
-	hideSymbolBtn.onclick = function (){
-		showSymbol(false);
-	}
-	hideSymbolBtn.classList.add('notPrint');
-	document.body.insertBefore(hideSymbolBtn, document.getElementsByTagName('table')[0]);
-	
-	var zoomOutBtn = document.createElement('button');
-	zoomOutBtn.textContent = '放大+';
-	zoomOutBtn.onclick = function (){
-		zoom(2);
-	}
-	zoomOutBtn.classList.add('notPrint');
-	document.body.insertBefore(zoomOutBtn, document.getElementsByTagName('table')[0]);
-	
-	var zoomInBtn = document.createElement('button');
-	zoomInBtn.textContent = '缩小-';
-	zoomInBtn.onclick = function (){
-		zoom(-2);
-	}
-	zoomInBtn.classList.add('notPrint');
-	document.body.insertBefore(zoomInBtn, document.getElementsByTagName('table')[0]);
-	
-	function zoom(step){
-		document.querySelectorAll('*').forEach(element => {
-			let size = parseInt(element.style.fontSize?element.style.fontSize:12) + step;
-			element.style.fontSize = size +'px';
-		});
-	}
-	
 	// 转换单词列表的格式
 	var trList = document.getElementsByTagName('tr');
 	var explainTrList = [];
 	var symbolTrList = [];
+	var redTrList = [];
 	for(var i = 1; i < trList.length; i++){
 		var lane = trList[i];
 		lane.children[0].textContent = '□';
@@ -36841,7 +36807,7 @@
 		var sign = lane.children[2];
 		var signArr = sign.textContent.split(':');
 		if(signArr.length>2){
-			for(var j = 0; j < signArr.length; j++){
+			for(var j = 1; j < signArr.length; j++){
 				if(signArr[j].indexOf('美')>=0){
 					sign.textContent = signArr[j+1];
 				}
@@ -36862,18 +36828,175 @@
 		// 单词点击后弹出注释
 		var dialogId = new Date();
 		lane.onclick = function(){
-			this.style.color = 'red';
+			redSignWord(this);
 			var dialog = document.getElementById("dialog");
 			dialog.textContent = this.children[3].textContent;
 			show(dialog, 'inline-block');
 			dialogId = new Date();
 			setTimeout(function(){
-				if(new Date() - dialogId >= 3000){
+				if(new Date() - dialogId >= 5000){
 					show(dialog, 'none');
 				}
-			}, 3000);
+			}, 5000);
 		}
 	}
+
+	// 生成按钮
+	var btnBar = document.createElement('div');
+	btnBar.style.position='fixed';
+	btnBar.id = 'btnBar';
+	document.body.insertBefore(btnBar, document.getElementsByTagName('table')[0]);
+	var showBtn = document.createElement('button');
+	showBtn.textContent = '显示注释';
+	showBtn.onclick = function (){
+		showExplain(true);
+	}
+	showBtn.classList.add('notPrint');
+	//document.body.insertBefore(showBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(showBtn);
+	var hideBtn = document.createElement('button');
+	hideBtn.textContent = '关闭注释';
+	hideBtn.onclick = function (){
+		showExplain(false);
+	}
+	hideBtn.classList.add('notPrint');
+	//document.body.insertBefore(hideBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(hideBtn);
+	
+	var showSymbolBtn = document.createElement('button');
+	showSymbolBtn.textContent = '显示音标';
+	showSymbolBtn.onclick = function (){
+		showSymbol(true);
+	}
+	showSymbolBtn.classList.add('notPrint');
+	//document.body.insertBefore(showSymbolBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(showSymbolBtn);
+	
+	var hideSymbolBtn = document.createElement('button');
+	hideSymbolBtn.textContent = '关闭音标';
+	hideSymbolBtn.onclick = function (){
+		showSymbol(false);
+	}
+	hideSymbolBtn.classList.add('notPrint');
+	//document.body.insertBefore(hideSymbolBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(hideSymbolBtn);
+	
+	var zoomOutBtn = document.createElement('button');
+	zoomOutBtn.textContent = '放大+';
+	zoomOutBtn.onclick = function (){
+		zoom(2);
+	}
+	zoomOutBtn.classList.add('notPrint');
+	//document.body.insertBefore(zoomOutBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(zoomOutBtn);
+	
+	var zoomInBtn = document.createElement('button');
+	zoomInBtn.textContent = '缩小-';
+	zoomInBtn.onclick = function (){
+		zoom(-2);
+	}
+	zoomInBtn.classList.add('notPrint');
+	//document.body.insertBefore(zoomInBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(zoomInBtn);
+	
+	var redFirstBtn = document.createElement('button');
+	redFirstBtn.textContent = '红词在前';
+	redFirstBtn.onclick = function (){
+		orderByRed();
+	}
+	redFirstBtn.classList.add('notPrint');
+	//document.body.insertBefore(redFirstBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(redFirstBtn);
+	
+	var recordBtn = document.createElement('button');
+	recordBtn.textContent = '保存历史';
+	recordBtn.onclick = function (){
+		record();
+	}
+	recordBtn.classList.add('notPrint');
+	//document.body.insertBefore(recordBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(recordBtn);
+	
+	var recoverBtn = document.createElement('button');
+	recoverBtn.textContent = '恢复历史';
+	recoverBtn.onclick = function (){
+		recover();
+	}
+	recoverBtn.classList.add('notPrint');
+	//document.body.insertBefore(recoverBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(recoverBtn);
+	
+	var clearBtn = document.createElement('button');
+	clearBtn.textContent = '清除历史';
+	clearBtn.onclick = function (){
+		clear();
+	}
+	clearBtn.classList.add('notPrint');
+	clearBtn.classList.add('warnning-btn');
+	//document.body.insertBefore(clearBtn, document.getElementsByTagName('table')[0]);
+	btnBar.appendChild(clearBtn);
+	
+	setTimeout(function(){
+		document.getElementsByTagName('table')[0].style.paddingTop = btnBar.offsetHeight + 'px';
+	},0)
+	
+	function redSignWord(ele){
+		ele.style.color = 'red';
+		ele.classList.add('red');
+		redTrList.push(ele);
+	}
+	
+	const historyItemName = '考研词汇';
+	// 清除历史
+	function clear(){
+		if (window.confirm('确定清除历史')) {
+			localStorage.clear(historyItemName);
+		}
+	}
+	
+	// 保存历史
+	function record(){
+		let recordWord = [];
+		redTrList.forEach( tr => {
+			recordWord.push(tr.children[1].textContent);
+		})
+		localStorage.setItem('考研词汇', recordWord);
+		console.log(localStorage.getItem('考研词汇'));
+	}
+	
+	// 恢复历史
+	function recover(){
+		let recordWord = localStorage.getItem('考研词汇');
+		document.querySelectorAll('tr').forEach(element => {
+			if(recordWord.indexOf(element.children[1].textContent)>=0){
+				redSignWord(element);
+			}
+		});
+	}
+	
+	// 红词在前
+	function orderByRed(){
+		let allTarList = document.querySelectorAll('tr');
+		let firstTr = allTarList[1];
+		for (let i = 1; i < allTarList.length; i++){
+			if(!allTarList[i].classList.contains('red')){
+				firstTr = document.querySelectorAll('tr')[i];
+				break;
+			}
+		}
+		redTrList.forEach(element => {
+			firstTr.before(element);
+		});
+	}
+	
+	function zoom(step){
+		document.querySelectorAll('*').forEach(element => {
+			let size = parseInt(element.style.fontSize?element.style.fontSize:12) + step;
+			element.style.fontSize = size +'px';
+		});
+	}
+	
+
 	
 	// 显示所有注释
 	function showExplain(visible){
@@ -36898,6 +37021,5 @@
 	
 	function show(element, display){
 		element.style.display = display;
-	}
-</script>
+	}</script>
 </html>
