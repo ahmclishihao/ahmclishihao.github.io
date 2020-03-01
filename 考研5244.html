@@ -36960,18 +36960,19 @@
 		redTrList.forEach( tr => {
 			recordWord.push(tr.children[1].textContent);
 		})
-		localStorage.setItem('考研词汇', recordWord);
-		console.log(localStorage.getItem('考研词汇'));
+		localStorage.setItem(historyItemName, recordWord.join(',')+',');
 	}
 	
 	// 恢复历史
 	function recover(){
-		let recordWord = localStorage.getItem('考研词汇');
-		document.querySelectorAll('tr').forEach(element => {
-			if(recordWord.indexOf(element.children[1].textContent)>=0){
-				redSignWord(element);
-			}
-		});
+		let recordWord = localStorage.getItem(historyItemName);
+		if(recordWord){
+			document.querySelectorAll('tr').forEach(element => {
+				if(recordWord.indexOf(element.children[1].textContent+',')>=0){
+					redSignWord(element);
+				}
+			});
+		}
 	}
 	
 	// 红词在前
