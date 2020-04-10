@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Search in Dictionary</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .search-input {
+      width: 300px;
+      height: 30px;
+      border-radius: 20px;
+      outline: none;
+      padding-left: 10px;
+      margin: 0 calc(50% - 150px);
+    }
+    .dictionary-list {
+      width: 100%;
+      height: calc(100% - 30px);
+      display: flex;
+    }
+    .dict {
+      flex: 1;
+      outline: none;
+      border: none; overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input class="search-input" id="words" placeholder="type your word, then press enter key to search."/>
+  </div>
+  
+  <iframeset class="dictionary-list">
+    <iframe class="dict" id="cambridge" src="https://dictionary.cambridge.org"></iframe>
+    <iframe class="dict" id="ldoce" src="https://cors.zme.ink/https://www.ldoceonline.com/"></iframe>
+    <iframe class="dict" id="oxford" src="https://cors.zme.ink/https://www.oxfordlearnersdictionaries.com/"></iframe>
+  </div>
+  <script type="text/javascript">
+    let wordInput = document.getElementById('words');
+    let cambridge = document.getElementById('cambridge');
+    let ldoce = document.getElementById('ldoce');
+    let oxford = document.getElementById('oxford');
+    let corsPrefix = 'https://cors.zme.ink/';
+    wordInput.onkeypress = function (event) {
+      // Enter 键
+      if (13 == event.keyCode) {
+        let word = this.value.trim();
+        cambridge.src = 'https://dictionary.cambridge.org/zhs/%E8%AF%8D%E5%85%B8/%E8%8B%B1%E8%AF%AD/' + word;
+        ldoce.src = corsPrefix + 'https://www.ldoceonline.com/dictionary/' + word;
+        oxford.src = corsPrefix + 'https://www.oxfordlearnersdictionaries.com/definition/english/' + word;
+      }
+    }
+  </script>
+</body>
+</html>
