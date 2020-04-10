@@ -40,7 +40,7 @@
     <input class="search-input" id="words" placeholder="type your word, then press enter key to search."/>
   </div>
   
-  <iframeset class="dictionary-list">
+  <div class="dictionary-list">
     <iframe class="dict" id="cambridge" src="https://dictionary.cambridge.org"></iframe>
     <iframe class="dict" id="ldoce" src="https://cors.zme.ink/https://www.ldoceonline.com/"></iframe>
     <iframe class="dict" id="oxford" src="https://cors.zme.ink/https://www.oxfordlearnersdictionaries.com/"></iframe>
@@ -58,6 +58,7 @@
         cambridge.src = 'https://dictionary.cambridge.org/zhs/%E8%AF%8D%E5%85%B8/%E8%8B%B1%E8%AF%AD/' + word;
         ldoce.src = corsPrefix + 'https://www.ldoceonline.com/dictionary/' + word;
         oxford.src = corsPrefix + 'https://www.oxfordlearnersdictionaries.com/definition/english/' + word;
+		console.log(cambridge.src, ldoce.src, oxford.src);
       }
     }
   </script>
